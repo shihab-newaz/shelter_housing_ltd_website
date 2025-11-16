@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { projects } from "@/data/projects";
-import { ProjectStatus } from "@/types/project";
+import { ProjectStatus, Project } from "@/types/project";
+import ProjectDetailModal from "./ProjectDetailModal";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -12,6 +13,8 @@ gsap.registerPlugin(ScrollTrigger);
 const FeaturedProjects = () => {
   const [activeFilter, setActiveFilter] = useState<ProjectStatus>("ongoing");
   const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const carouselRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -69,6 +72,11 @@ const FeaturedProjects = () => {
     if (e.key === "ArrowRight") handleNext();
   };
 
+  const handleViewDetails = (project: Project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
   const filters: { label: string; value: ProjectStatus }[] = [
     { label: "Ongoing", value: "ongoing" },
     { label: "Completed", value: "completed" },
@@ -85,13 +93,13 @@ const FeaturedProjects = () => {
           </h2>
           
           {/* Filter Tabs */}
-          <div className="inline-flex items-center gap-2 p-2 bg-white rounded-lg shadow-card">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 bg-white rounded-lg shadow-card">
             {filters.map((filter) => (
               <button
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
                 className={cn(
-                  "px-6 py-3 rounded-md font-semibold transition-all duration-300 text-sm md:text-base",
+                  "px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base",
                   activeFilter === filter.value
                     ? "bg-gold text-primary shadow-md"
                     : "text-muted-foreground hover:text-primary hover:bg-sage/10"
@@ -113,7 +121,7 @@ const FeaturedProjects = () => {
         >
           <div
             ref={carouselRef}
-            className="flex items-center justify-center gap-6 overflow-hidden min-h-[500px]"
+            className="flex items-center justify-center gap-3 sm:gap-6 overflow-hidden min-h-[400px] sm:min-h-[500px] px-2 sm:px-0"
           >
             {filteredProjects.map((project, index) => {
               const isCenter = index === activeIndex;
@@ -125,40 +133,52 @@ const FeaturedProjects = () => {
                 <div
                   key={project.id}
                   className={cn(
-                    "transition-all duration-500 ease-elegant cursor-pointer",
+                    "transition-all duration-500 ease-elegant cursor-pointer flex-shrink-0",
                     isCenter
-                      ? "w-full md:w-[600px] opacity-100 scale-100 z-20"
-                      : "w-0 md:w-[200px] opacity-40 scale-90 z-10",
-                    !isVisible && "hidden md:block"
+                      ? "w-[85vw] sm:w-[70vw] md:w-[600px] opacity-100 scale-100 z-20"
+                      : "w-0 sm:w-[120px] md:w-[200px] opacity-40 scale-90 z-10",
+                    !isVisible && "hidden sm:block"
                   )}
                   onClick={() => setActiveIndex(index)}
                   role="button"
                   tabIndex={0}
                   aria-label={`View ${project.title}`}
                 >
-                  <div className="group relative overflow-hidden rounded-2xl shadow-elegant hover:shadow-hover transition-shadow duration-300">
+                  <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover:shadow-hover transition-shadow duration-300">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-106"
+                      className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
                     
                     {isCenter && (
-                      <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                        <div className="h-1 w-16 bg-gold mb-4" />
-                        <h3 className="text-3xl font-bold mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
+                        <div className="h-1 w-12 sm:w-16 bg-gold mb-2 sm:mb-4" />
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
                           {project.title}
                         </h3>
-                        <p className="text-lg mb-2 text-white/90">{project.location}</p>
-                        <p className="text-white/80 mb-4">{project.description}</p>
-                        <div className="flex items-center gap-4 text-sm">
-                          <span className="px-3 py-1 bg-sage/20 rounded-full">{project.type}</span>
+                        <p className="text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-white/90">{project.location}</p>
+                        <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
+                        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm mb-3 sm:mb-4">
+                          <span className="px-2 sm:px-3 py-1 bg-sage/20 rounded-full">{project.type}</span>
                           {project.units && (
-                            <span className="px-3 py-1 bg-gold/20 rounded-full">{project.units} Units</span>
+                            <span className="px-2 sm:px-3 py-1 bg-gold/20 rounded-full">{project.units} Units</span>
                           )}
                         </div>
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleViewDetails(project);
+                          }}
+                          size="sm"
+                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-2"
+                        >
+                          <Eye className="h-4 w-4" />
+                          <span className="hidden sm:inline">View Details</span>
+                          <span className="sm:hidden">Details</span>
+                        </Button>
                       </div>
                     )}
                   </div>
@@ -168,26 +188,26 @@ const FeaturedProjects = () => {
           </div>
 
           {/* Navigation Buttons */}
-          <div className="flex items-center justify-center gap-4 mt-8">
+          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
             <Button
               variant="outline"
               size="icon"
               onClick={handlePrevious}
-              className="border-sage text-sage hover:bg-sage hover:text-white"
+              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10"
               aria-label="Previous project"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
 
             {/* Dots Indicator */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {filteredProjects.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveIndex(index)}
                   className={cn(
-                    "w-2 h-2 rounded-full transition-all duration-300",
-                    index === activeIndex ? "bg-gold w-8" : "bg-sage/40"
+                    "h-1.5 sm:h-2 rounded-full transition-all duration-300",
+                    index === activeIndex ? "bg-gold w-6 sm:w-8" : "bg-sage/40 w-1.5 sm:w-2"
                   )}
                   aria-label={`Go to project ${index + 1}`}
                 />
@@ -198,14 +218,21 @@ const FeaturedProjects = () => {
               variant="outline"
               size="icon"
               onClick={handleNext}
-              className="border-sage text-sage hover:bg-sage hover:text-white"
+              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10"
               aria-label="Next project"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Project Detail Modal */}
+      <ProjectDetailModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 };
