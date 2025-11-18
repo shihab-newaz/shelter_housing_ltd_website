@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import heroBg from "@/assets/hero-bg.jpg";
+import YouTubeEmbed from "@/utils/YouTubeEmbed";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,31 +74,12 @@ const Hero = () => {
 
   return (
     <section id="home" ref={heroRef} className="relative w-full h-screen overflow-hidden">
-      {/* Video Background - using image as fallback */}
-      <div
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full"
-        style={{
-          backgroundImage: `url(${heroBg})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-        }}
-      >
-        {/* For production, replace with actual video:
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={heroBg}
-          className="w-full h-full object-cover"
-        >
-          <source src="/path-to-video.webm" type="video/webm" />
-          <source src="/path-to-video.mp4" type="video/mp4" />
-        </video>
-        */}
+      {/* YouTube Video Background */}
+      <div ref={videoRef} className="absolute inset-0 w-full h-full">
+        <YouTubeEmbed
+          videoId="cBPAdYMjTA8"
+          title="Luxury Real Estate Showcase"
+        />
       </div>
 
       {/* Gradient Overlay */}

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import logo from "@/assets/Logo/logo.png";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -23,9 +24,9 @@ const Navbar = () => {
   useEffect(() => {
     // GSAP ScrollTrigger for navbar transformation
     const navbar = document.querySelector("#navbar");
-    
+
     gsap.to(navbar, {
-      backgroundColor: isScrolled ? "hsl(165, 43%, 17%)" : "transparent",
+      backgroundColor: isScrolled ? "#1a3d2e" : "transparent",
       backdropFilter: isScrolled ? "blur(12px)" : "none",
       duration: 0.15,
       ease: "power2.out",
@@ -40,7 +41,10 @@ const Navbar = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
@@ -60,11 +64,17 @@ const Navbar = () => {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <a href="#home" className="flex items-center space-x-3" onClick={(e) => handleNavClick(e, "#home")}>
-            <div className="text-2xl font-bold tracking-tight">
-              <span className="text-sage">SHELTER</span>
-              <span className="text-white"> HOUSING</span>
-            </div>
+          <a
+            href="#home"
+            className="flex items-center space-x-3"
+            onClick={(e) => handleNavClick(e, "#home")}
+          >
+            <img
+              src={logo}
+              alt="Shelter Housing Logo"
+              width={200}
+              height={200}
+            />
           </a>
 
           {/* Desktop Navigation */}
@@ -80,7 +90,10 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sage group-hover:w-full transition-all duration-300 ease-elegant" />
               </a>
             ))}
-            <Button variant="default" className="bg-gold hover:bg-gold/90 text-primary font-semibold">
+            <Button
+              variant="default"
+              className="bg-gold hover:bg-gold/90 text-primary font-semibold"
+            >
               Enquire
             </Button>
           </div>
@@ -110,7 +123,10 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button variant="default" className="w-full bg-gold hover:bg-gold/90 text-primary font-semibold">
+            <Button
+              variant="default"
+              className="w-full bg-gold hover:bg-gold/90 text-primary font-semibold"
+            >
               Enquire
             </Button>
           </div>

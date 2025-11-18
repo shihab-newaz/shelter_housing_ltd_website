@@ -3,11 +3,10 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import aboutImage from "@/assets/about-image.jpg";
-import office1 from "@/assets/office-1.jpg";
-import office2 from "@/assets/office-2.jpg";
-import office3 from "@/assets/office-3.jpg";
-import office4 from "@/assets/office-4.jpg";
+import office1 from "@/assets/Office/office_image (1).jpg";
+import office2 from "@/assets/Office/office_image (2).jpg";
+import office3 from "@/assets/Office/office_image (3).jpg";
+import office4 from "@/assets/Office/office_image (4).jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
