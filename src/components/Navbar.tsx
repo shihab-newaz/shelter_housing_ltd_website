@@ -24,9 +24,8 @@ const Navbar = () => {
   useEffect(() => {
     // GSAP ScrollTrigger for navbar transformation
     const navbar = document.querySelector("#navbar");
-
     gsap.to(navbar, {
-      backgroundColor: isScrolled ? "#1a3d2e" : "transparent",
+      backgroundColor: isScrolled ? "rgba(25, 62, 53, 0.4)" : "transparent",
       backdropFilter: isScrolled ? "blur(12px)" : "none",
       duration: 0.15,
       ease: "power2.out",

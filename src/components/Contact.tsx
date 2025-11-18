@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { contactInfo } from "@/data/contacts";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -76,39 +77,22 @@ const Contact = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Contact Info */}
             <div className="space-y-8">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-sage/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-5 h-5 text-sage" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-primary mb-1">Phone</h4>
-                  <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-sage/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-5 h-5 text-sage" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-primary mb-1">Email</h4>
-                  <p className="text-muted-foreground">info@shelterhousing.com</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-sage/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-5 h-5 text-sage" />
-                </div>
-                <div>
-                  <h4 className="font-semibold text-primary mb-1">Office</h4>
-                  <p className="text-muted-foreground">
-                    123 Real Estate Avenue<br />
-                    Downtown District<br />
-                    City, State 12345
-                  </p>
-                </div>
-              </div>
+              {contactInfo.map((info) => {
+                const Icon = info.icon;
+                return (
+                  <div key={info.title} className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-sage/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-5 h-5 text-sage" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-primary mb-1">{info.title}</h4>
+                      {info.details.map((detail, index) => (
+                        <p key={index} className="text-muted-foreground">{detail}</p>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
             </div>
 
             {/* Contact Form */}

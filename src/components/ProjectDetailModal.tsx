@@ -20,13 +20,6 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
           <DialogTitle className="text-3xl font-bold text-primary" style={{ fontFamily: "'Outfit', sans-serif" }}>
             {project.title}
           </DialogTitle>
-          <button
-            onClick={onClose}
-            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-gold focus:ring-offset-2"
-          >
-            <X className="h-4 w-4" />
-            <span className="sr-only">Close</span>
-          </button>
         </DialogHeader>
 
         <div className="space-y-6">
@@ -96,16 +89,6 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
                 </li>
               ))}
             </ul>
-          </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button size="lg" className="flex-1 bg-sage hover:bg-sage/90 text-white font-semibold">
-              Schedule a Visit
-            </Button>
-            <Button size="lg" variant="outline" className="flex-1 border-sage text-sage hover:bg-sage hover:text-white">
-              Download Brochure
-            </Button>
           </div>
         </div>
       </DialogContent>
