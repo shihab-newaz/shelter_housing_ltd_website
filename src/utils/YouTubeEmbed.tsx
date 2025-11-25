@@ -50,7 +50,8 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId, title }) => {
   }, []);
 
   /**
-   *
+   * Calculate iframe dimensions to ensure high resolution playback
+   * YouTube adapts quality based on player size, so we ensure minimum 1080p dimensions
    * @returns {CSSProperties} CSS properties for the iframe
    */
   const getIframeStyles = (): CSSProperties => {
@@ -61,14 +62,19 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId, title }) => {
     const containerHeight = dimensions.height;
     const aspectRatio = 16 / 9; // Standard YouTube video aspect ratio
 
+    // Ensure minimum dimensions for 1080p/4K quality
+    // YouTube uses player size to determine quality - larger = higher quality
+    const minWidth = 1920; // 1080p width minimum
+    const minHeight = 1080; // 1080p height minimum
+
     // Initially set dimensions based on width
-    let iframeWidth = containerWidth;
-    let iframeHeight = containerWidth / aspectRatio;
+    let iframeWidth = Math.max(containerWidth, minWidth);
+    let iframeHeight = iframeWidth / aspectRatio;
 
     // If height is too small, scale based on height instead
-    if (iframeHeight < containerHeight) {
-      iframeHeight = containerHeight;
-      iframeWidth = containerHeight * aspectRatio;
+    if (iframeHeight < containerHeight || iframeHeight < minHeight) {
+      iframeHeight = Math.max(containerHeight, minHeight);
+      iframeWidth = iframeHeight * aspectRatio;
     }
 
     // Return styles for centered, scaled iframe
@@ -82,16 +88,41 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId, title }) => {
     };
   };
 
+  // Build YouTube embed URL with HD quality parameters
+  const embedUrl = new URL(`https://www.youtube-nocookie.com/embed/${videoId}`);
+  const params = new URLSearchParams({
+    autoplay: '1',
+    mute: '1',
+    controls: '0',
+    modestbranding: '1',
+    loop: '1',
+    playlist: videoId,
+    playsinline: '1',
+    rel: '0',
+    showinfo: '0',
+    iv_load_policy: '3',
+    start: '11',
+    enablejsapi: '1', // Enable JS API for quality control
+    origin: typeof window !== 'undefined' ? window.location.origin : '',
+    vq: 'hd1080', // Request 1080p quality (hd720, hd1080, highres for 4K)
+    hd: '1', // Legacy HD parameter
+  });
+  embedUrl.search = params.toString();
+
   return (
     <div
       ref={containerRef}
       className="absolute inset-0 w-full h-full overflow-hidden bg-black"
     >
       <iframe
-        src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=1&controls=0&modestbranding=1&loop=1&playlist=${videoId}&playsinline=1&rel=0&showinfo=0&iv_load_policy=3&start=11&enablejsapi=0`}
+        src={embedUrl.toString()}
         title={title}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowFullScreen
         style={getIframeStyles()}
+        // Explicitly set large dimensions for quality hint
+        width="1920"
+        height="1080"
       />
     </div>
   );
@@ -112,5 +143,14 @@ export default YouTubeEmbed;
  * - showinfo=0: Hide video title and uploader
  * - iv_load_policy=3: Hide video annotations
  * - start=11: Start video at 11 seconds
- * - enablejsapi=0: Disable JavaScript API
+ * - enablejsapi=1: Enable JavaScript API for quality control
+ * - origin: Required for JS API security
+ * - vq=hd1080: Request 1080p quality (options: small, medium, large, hd720, hd1080, highres)
+ * - hd=1: Legacy parameter to hint HD preference
+ * 
+ * Note: YouTube quality is ultimately determined by:
+ * 1. Player dimensions (larger iframe = higher quality available)
+ * 2. Network conditions
+ * 3. Video availability (source must have 1080p/4K)
+ * The vq parameter is a hint, not a guarantee.
  */

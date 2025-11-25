@@ -102,7 +102,7 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a href="tel:+8801755605072">
+            <a href="tel:+09617335588">
               <Button
                 variant="default"
                 className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-110 hover:shadow-lg"

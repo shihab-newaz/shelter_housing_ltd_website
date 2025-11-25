@@ -59,6 +59,29 @@ This project is built with:
 - React
 - shadcn-ui
 - Tailwind CSS
+- GSAP (animations)
+- EmailJS (contact form)
+
+## Contact Form Setup
+
+The contact form uses EmailJS for sending emails. To enable email functionality:
+
+1. Sign up at [emailjs.com](https://www.emailjs.com/)
+2. Add an email service (Gmail, Outlook, etc.)
+3. Create an email template using the HTML structure provided in `.env.example`
+4. Copy `.env.example` to `.env` and fill in your EmailJS credentials:
+   ```
+   VITE_EMAILJS_SERVICE_ID=your_service_id
+   VITE_EMAILJS_TEMPLATE_ID=your_template_id
+   VITE_EMAILJS_PUBLIC_KEY=your_public_key
+   ```
+
+The template variables are:
+- `{{name}}` - Sender's name
+- `{{email}}` - Sender's email
+- `{{phone}}` - Sender's phone (optional)
+- `{{message}}` - The message content
+- `{{time}}` - Timestamp when message was sent
 
 ## How can I deploy this project?
 

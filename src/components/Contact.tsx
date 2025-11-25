@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactInfo } from "@/constants/contacts";
+import { sendContactEmail, isValidEmail, isValidPhone } from "@/lib/emailService";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,6 +17,8 @@ const Contact = () => {
     phone: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const { toast } = useToast();
   const sectionRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -40,16 +43,73 @@ const Contact = () => {
     }
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const validateForm = (): boolean => {
+    const newErrors: Record<string, string> = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!isValidEmail(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    if (formData.phone && !isValidPhone(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Simulate form submission
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for your inquiry. We'll get back to you soon.",
-    });
+    if (!validateForm()) {
+      toast({
+        title: "Validation Error",
+        description: "Please fix the errors in the form.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-    setFormData({ name: "", email: "", phone: "", message: "" });
+    setIsSubmitting(true);
+    setErrors({});
+
+    try {
+      const response = await sendContactEmail(formData);
+
+      if (response.success) {
+        toast({
+          title: "Message Sent!",
+          description: response.message,
+        });
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      } else {
+        toast({
+          title: "Error",
+          description: response.message,
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -107,8 +167,14 @@ const Contact = () => {
                     value={formData.name}
                     onChange={handleChange}
                     required
-                    className="border-sage/30 focus:border-sage focus:ring-sage"
+                    disabled={isSubmitting}
+                    className={`border-sage/30 focus:border-sage focus:ring-sage ${
+                      errors.name ? "border-red-500 focus:border-red-500" : ""
+                    }`}
                   />
+                  {errors.name && (
+                    <p className="text-sm text-red-500">{errors.name}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -122,8 +188,14 @@ const Contact = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className="border-sage/30 focus:border-sage focus:ring-sage"
+                    disabled={isSubmitting}
+                    className={`border-sage/30 focus:border-sage focus:ring-sage ${
+                      errors.email ? "border-red-500 focus:border-red-500" : ""
+                    }`}
                   />
+                  {errors.email && (
+                    <p className="text-sm text-red-500">{errors.email}</p>
+                  )}
                 </div>
               </div>
 
@@ -137,8 +209,14 @@ const Contact = () => {
                   type="tel"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="border-sage/30 focus:border-sage focus:ring-sage"
+                  disabled={isSubmitting}
+                  className={`border-sage/30 focus:border-sage focus:ring-sage ${
+                    errors.phone ? "border-red-500 focus:border-red-500" : ""
+                  }`}
                 />
+                {errors.phone && (
+                  <p className="text-sm text-red-500">{errors.phone}</p>
+                )}
               </div>
 
               <div className="space-y-2">
@@ -152,16 +230,45 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   rows={6}
-                  className="border-sage/30 focus:border-sage focus:ring-sage resize-none"
+                  disabled={isSubmitting}
+                  className={`border-sage/30 focus:border-sage focus:ring-sage resize-none ${
+                    errors.message ? "border-red-500 focus:border-red-500" : ""
+                  }`}
                 />
+                {errors.message && (
+                  <p className="text-sm text-red-500">{errors.message}</p>
+                )}
               </div>
 
               <Button
                 type="submit"
                 size="lg"
-                className="w-full md:w-auto bg-gold hover:bg-gold/90 text-primary font-semibold"
+                disabled={isSubmitting}
+                className="w-full md:w-auto bg-gold hover:bg-gold/90 text-primary font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Send Message
+                {isSubmitting ? (
+                  <span className="flex items-center gap-2">
+                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                        fill="none"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Sending...
+                  </span>
+                ) : (
+                  "Send Message"
+                )}
               </Button>
             </form>
           </div>
