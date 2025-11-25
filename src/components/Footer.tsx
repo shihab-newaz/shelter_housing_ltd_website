@@ -1,29 +1,7 @@
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { footerLinks, socialLinks } from "@/constants/footer";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-
-  const footerLinks = {
-    company: [
-      { name: "About Us", href: "#about" },
-      { name: "Projects", href: "#projects" },
-      { name: "Services", href: "#services" },
-      { name: "Contact", href: "#contact" },
-    ],
-    resources: [
-      { name: "Blog", href: "#" },
-      { name: "Careers", href: "#" },
-      { name: "Privacy Policy", href: "#" },
-      { name: "Terms of Service", href: "#" },
-    ],
-  };
-
-  const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-  ];
 
   return (
     <footer className="bg-primary text-white">
@@ -33,10 +11,10 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <div className="text-2xl font-bold mb-4">
               <span className="text-sage">SHELTER</span>
-              <span className="text-white"> HOUSING</span>
+              <span className="text-white"> HOUSING LIMITED</span>
             </div>
             <p className="text-white/70 mb-6 max-w-md">
-              Building exceptional homes and commercial spaces since 2005. Your trusted partner in premium real estate development.
+              Building exceptional residential homes in Dhaka since 1995. Your trusted partner in premium real estate development.
             </p>
             <div className="flex items-center gap-4">
               {socialLinks.map((social) => (
@@ -91,7 +69,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-sm">
-              © {currentYear} Shelter Housing Limited. All rights reserved.
+              © {currentYear} Shelter Housing Bangladesh. All rights reserved.
             </p>
             <p className="text-white/60 text-sm">
               Designed with excellence for luxury living.

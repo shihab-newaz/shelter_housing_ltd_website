@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { Award, Shield, Users, TrendingUp } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { features } from "@/constants/whyChooseUs";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -60,29 +60,6 @@ const WhyChooseUs = () => {
       }
     }
   }, []);
-
-  const features = [
-    {
-      icon: Award,
-      title: "Award-Winning Design",
-      description: "Recognized internationally for architectural excellence and innovative design solutions.",
-    },
-    {
-      icon: Shield,
-      title: "Quality Assurance",
-      description: "Rigorous quality checks and premium materials ensure lasting value and satisfaction.",
-    },
-    {
-      icon: Users,
-      title: "Customer-Centric",
-      description: "Dedicated support team and transparent processes for a seamless experience.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Smart Investment",
-      description: "Prime locations and appreciation potential for long-term investment value.",
-    },
-  ];
 
   return (
     <section id="services" ref={sectionRef} className="py-24 bg-gradient-primary text-white">

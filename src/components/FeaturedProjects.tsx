@@ -2,7 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { projects } from "@/data/projects";
+import { projects } from "@/constants/projects";
+import { projectFilters } from "@/constants/featuredProjects";
 import { ProjectStatus, Project } from "@/types/project";
 import ProjectDetailModal from "./ProjectDetailModal";
 import gsap from "gsap";
@@ -77,12 +78,6 @@ const FeaturedProjects = () => {
     setIsModalOpen(true);
   };
 
-  const filters: { label: string; value: ProjectStatus }[] = [
-    { label: "Ongoing", value: "ongoing" },
-    { label: "Completed", value: "completed" },
-    { label: "Upcoming", value: "upcoming" },
-  ];
-
   return (
     <section id="projects" ref={containerRef} className="py-24 bg-geometric bg-muted">
       <div className="container mx-auto px-6 lg:px-12">
@@ -94,7 +89,7 @@ const FeaturedProjects = () => {
           
           {/* Filter Tabs */}
           <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 bg-white rounded-lg shadow-card">
-            {filters.map((filter) => (
+            {projectFilters.map((filter) => (
               <button
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
