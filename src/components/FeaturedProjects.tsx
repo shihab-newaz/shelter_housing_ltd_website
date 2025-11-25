@@ -88,7 +88,7 @@ const FeaturedProjects = () => {
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-primary mb-6 font-display">
+          <h2 className="text-primary mb-6">
             Featured Projects
           </h2>
           
@@ -156,15 +156,15 @@ const FeaturedProjects = () => {
                     {isCenter && (
                       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
                         <div className="h-1 w-12 sm:w-16 bg-gold mb-2 sm:mb-4 animate-fade-in" />
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 font-display">
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
                           {project.title}
                         </h3>
-                        <p className="text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-white/90 font-sans">{project.location}</p>
-                        <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2 font-sans">{project.description}</p>
+                        <p className="text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-white/90">{project.location}</p>
+                        <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
                         <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm mb-3 sm:mb-4">
-                          <span className="px-2 sm:px-3 py-1 bg-sage/30 backdrop-blur-sm rounded-full font-mono text-mono-light">{project.type}</span>
+                          <span className="px-2 sm:px-3 py-1 bg-sage/30 backdrop-blur-sm rounded-full text-mono-light">{project.type}</span>
                           {project.units && (
-                            <span className="px-2 sm:px-3 py-1 bg-gold/30 backdrop-blur-sm rounded-full font-mono text-mono-light">{project.units} Units</span>
+                            <span className="px-2 sm:px-3 py-1 bg-gold/30 backdrop-blur-sm rounded-full text-mono-light">{project.units} Units</span>
                           )}
                         </div>
                         <Button

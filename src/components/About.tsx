@@ -127,43 +127,38 @@ const About = () => {
           {/* Content */}
           <div ref={contentRef} className="space-y-4 sm:space-y-6">
             <div className="h-1 w-12 sm:w-16 bg-gold animate-fade-in" />
-            <h2 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-display">
-              Building Excellence Since 2005
+            <h2 className="text-primary text-2xl sm:text-3xl lg:text-4xl ">
+              Crafting Luxury Living Since 1995
             </h2>
-            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-sans">
-              Shelter Housing Limited has been at the forefront of premium real estate development for nearly two decades. 
-              Our commitment to architectural excellence, sustainable practices, and customer satisfaction has made us a 
-              trusted name in luxury residential and commercial projects.
+            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+              Shelter Housing Bangladesh has been a pioneer in premium real estate development within Dhaka for nearly three decades. 
+              Our dedication to architectural innovation, sustainable building practices, and community-focused development has established us as a 
+              leading name in luxury residential projects within the city.
             </p>
-            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-sans">
-              With a portfolio spanning luxury apartments, commercial towers, and exclusive villas, we bring together 
-              innovative design, quality craftsmanship, and modern amenities to create spaces that inspire and endure.
+            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+              From modern apartments in Dhaka to exclusive villas in the surrounding areas, we combine traditional Bangladeshi aesthetics with 
+              contemporary design, superior craftsmanship, and world-class amenities to create homes that reflect the vibrant spirit of Dhaka while 
+              meeting global standards of luxury and comfort.
             </p>
             
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 pt-2 sm:pt-4">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-2 sm:pt-4">
               <div className="hover-lift p-4 rounded-lg bg-sage/5">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
-                  50+
-                </div>
-                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Completed Projects</div>
-              </div>
-              <div className="hover-lift p-4 rounded-lg bg-sage/5">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
-                  10K+
-                </div>
-                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Happy Residents</div>
-              </div>
-              <div className="hover-lift p-4 rounded-lg bg-sage/5">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
-                  15+
-                </div>
-                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Years Experience</div>
-              </div>
-              <div className="hover-lift p-4 rounded-lg bg-sage/5">
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2">
                   25+
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Awards Won</div>
+                <div className="text-xs sm:text-sm text-muted-foreground text-mono-light">Completed Projects</div>
+              </div>
+              <div className="hover-lift p-4 rounded-lg bg-sage/5">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2">
+                  500+
+                </div>
+                <div className="text-xs sm:text-sm text-muted-foreground text-mono-light">Happy Residents</div>
+              </div>
+              <div className="hover-lift p-4 rounded-lg bg-sage/5">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2">
+                  29+
+                </div>
+                <div className="text-xs sm:text-sm text-muted-foreground text-mono-light">Years Experience</div>
               </div>
             </div>
 
