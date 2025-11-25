@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from "react";
-import { Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -66,7 +65,7 @@ const Contact = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <div className="h-1 w-16 bg-gold mx-auto mb-6" />
-            <h2 className="text-primary mb-4" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <h2 className="text-primary mb-4 font-display">
               Get In Touch
             </h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">

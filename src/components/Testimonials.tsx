@@ -70,7 +70,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="max-w-4xl mx-auto text-center">
           <div className="h-1 w-16 bg-gold mx-auto mb-6" />
-          <h2 className="text-primary mb-16" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          <h2 className="text-primary mb-16 font-display">
             What Our Clients Say
           </h2>
 

@@ -84,11 +84,11 @@ const FeaturedProjects = () => {
   ];
 
   return (
-    <section id="projects" ref={containerRef} className="py-24 bg-muted">
+    <section id="projects" ref={containerRef} className="py-24 bg-geometric bg-muted">
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-primary mb-6" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          <h2 className="text-primary mb-6 font-display">
             Featured Projects
           </h2>
           
@@ -99,10 +99,10 @@ const FeaturedProjects = () => {
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
                 className={cn(
-                  "px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold transition-all duration-300 text-xs sm:text-sm md:text-base",
+                  "px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold hover-spring text-xs sm:text-sm md:text-base",
                   activeFilter === filter.value
-                    ? "bg-gold text-primary shadow-md"
-                    : "text-muted-foreground hover:text-primary hover:bg-sage/10"
+                    ? "bg-gold text-primary shadow-md scale-105"
+                    : "text-muted-foreground hover:text-primary hover:bg-sage/20 hover:scale-105"
                 )}
               >
                 {filter.label}
@@ -144,27 +144,27 @@ const FeaturedProjects = () => {
                   tabIndex={0}
                   aria-label={`View ${project.title}`}
                 >
-                  <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover:shadow-hover transition-shadow duration-300">
+                  <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover-lift bg-noise">
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full aspect-[16/10] object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-110"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
                     
                     {isCenter && (
                       <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
-                        <div className="h-1 w-12 sm:w-16 bg-gold mb-2 sm:mb-4" />
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+                        <div className="h-1 w-12 sm:w-16 bg-gold mb-2 sm:mb-4 animate-fade-in" />
+                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2 font-display">
                           {project.title}
                         </h3>
-                        <p className="text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-white/90">{project.location}</p>
-                        <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
+                        <p className="text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-white/90 font-sans">{project.location}</p>
+                        <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2 font-sans">{project.description}</p>
                         <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm mb-3 sm:mb-4">
-                          <span className="px-2 sm:px-3 py-1 bg-sage/20 rounded-full">{project.type}</span>
+                          <span className="px-2 sm:px-3 py-1 bg-sage/30 backdrop-blur-sm rounded-full font-mono text-mono-light">{project.type}</span>
                           {project.units && (
-                            <span className="px-2 sm:px-3 py-1 bg-gold/20 rounded-full">{project.units} Units</span>
+                            <span className="px-2 sm:px-3 py-1 bg-gold/30 backdrop-blur-sm rounded-full font-mono text-mono-light">{project.units} Units</span>
                           )}
                         </div>
                         <Button
@@ -173,7 +173,7 @@ const FeaturedProjects = () => {
                             handleViewDetails(project);
                           }}
                           size="sm"
-                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-2"
+                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-2 hover-spring hover:scale-110 hover:shadow-lg"
                         >
                           <Eye className="h-4 w-4" />
                           <span className="hidden sm:inline">View Details</span>
@@ -193,7 +193,7 @@ const FeaturedProjects = () => {
               variant="outline"
               size="icon"
               onClick={handlePrevious}
-              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10"
+              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10 hover-spring hover:scale-110"
               aria-label="Previous project"
             >
               <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
@@ -206,8 +206,8 @@ const FeaturedProjects = () => {
                   key={index}
                   onClick={() => setActiveIndex(index)}
                   className={cn(
-                    "h-1.5 sm:h-2 rounded-full transition-all duration-300",
-                    index === activeIndex ? "bg-gold w-6 sm:w-8" : "bg-sage/40 w-1.5 sm:w-2"
+                    "h-1.5 sm:h-2 rounded-full hover-spring",
+                    index === activeIndex ? "bg-gold w-6 sm:w-8" : "bg-sage/40 w-1.5 sm:w-2 hover:bg-sage"
                   )}
                   aria-label={`Go to project ${index + 1}`}
                 />
@@ -218,7 +218,7 @@ const FeaturedProjects = () => {
               variant="outline"
               size="icon"
               onClick={handleNext}
-              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10"
+              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10 hover-spring hover:scale-110"
               aria-label="Next project"
             >
               <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />

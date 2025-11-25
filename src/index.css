@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* Anti-Slop Design System: Distinctive, Atmospheric, Polished */
 
 @layer base {
   :root {
@@ -49,19 +47,31 @@ All colors MUST be HSL.
 
     --radius: 0.5rem;
 
-    /* Gradients */
+    /* Gradients - Layered & Atmospheric */
     --gradient-primary: linear-gradient(135deg, hsl(165, 43%, 17%) 0%, hsl(145, 27%, 63%) 100%);
     --gradient-secondary: linear-gradient(135deg, hsl(26, 35%, 33%) 0%, hsl(40, 40%, 69%) 100%);
-    --gradient-hero-overlay: linear-gradient(180deg, rgba(23, 61, 52, 0.55) 0%, rgba(23, 61, 52, 0.25) 100%);
+    --gradient-hero-overlay: linear-gradient(180deg, rgba(23, 61, 52, 0.65) 0%, rgba(23, 61, 52, 0.35) 100%);
+    --gradient-atmospheric: linear-gradient(180deg, 
+      hsl(165, 43%, 17%) 0%, 
+      hsl(165, 40%, 20%) 50%, 
+      hsl(165, 43%, 17%) 100%);
     
-    /* Shadows */
+    /* Shadows - Elegant & Layered */
     --shadow-elegant: 0 10px 40px -10px hsl(165, 43%, 17%, 0.15);
     --shadow-card: 0 4px 20px -4px hsl(165, 43%, 17%, 0.08);
     --shadow-hover: 0 20px 60px -15px hsl(165, 43%, 17%, 0.25);
+    --shadow-brutal: 8px 8px 0px hsl(165, 43%, 17%);
     
-    /* Transitions */
+    /* Transitions - Spring Physics */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-elegant: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Typography */
+    --font-display: 'Playfair Display', serif;
+    --font-sans: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
   }
 
   .dark {
@@ -102,39 +112,147 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
     font-feature-settings: "kern" 1, "liga" 1;
+    /* Subtle noise texture for atmospheric depth */
+    background-image: 
+      radial-gradient(circle at 25% 25%, hsl(145, 27%, 63%, 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, hsl(40, 40%, 69%, 0.03) 0%, transparent 50%);
   }
 
+  /* Typography System - Character Over Neutrality */
   h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
     @apply font-bold tracking-tight;
   }
 
   h1 {
     @apply text-5xl md:text-7xl lg:text-8xl;
-    line-height: 1.1;
+    line-height: 1;
+    font-weight: 900;
+    letter-spacing: -0.02em;
   }
 
   h2 {
     @apply text-4xl md:text-5xl lg:text-6xl;
-    line-height: 1.15;
+    line-height: 1.1;
+    font-weight: 800;
+    letter-spacing: -0.01em;
   }
 
   h3 {
     @apply text-3xl md:text-4xl lg:text-5xl;
-    line-height: 1.2;
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    @apply text-2xl md:text-3xl;
+    font-weight: 700;
+  }
+
+  h5 {
+    font-family: var(--font-sans);
+    @apply text-xl md:text-2xl;
+    font-weight: 600;
   }
 
   p {
+    font-family: var(--font-sans);
     @apply text-base md:text-lg leading-relaxed;
+    font-weight: 400;
+  }
+
+  /* Monospace for technical/accent text */
+  .text-mono {
+    font-family: var(--font-mono);
+    font-weight: 400;
+  }
+
+  .text-mono-light {
+    font-family: var(--font-mono);
+    font-weight: 200;
+  }
+
+  .text-mono-bold {
+    font-family: var(--font-mono);
+    font-weight: 800;
   }
 }
 
-@layer base {
-  * {
-    @apply border-border;
+/* Utility Classes - Atmospheric Backgrounds */
+@layer utilities {
+  /* Noise Texture Utility */
+  .bg-noise {
+    position: relative;
+  }
+  
+  .bg-noise::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    pointer-events: none;
   }
 
-  body {
-    @apply bg-background text-foreground;
+  /* Layered Gradient Backgrounds */
+  .bg-atmospheric {
+    background: var(--gradient-atmospheric);
+    position: relative;
   }
+
+  .bg-atmospheric::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, hsl(145, 27%, 63%, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, hsl(40, 40%, 69%, 0.1) 0%, transparent 50%);
+    pointer-events: none;
+  }
+
+  /* Geometric Pattern Background */
+  .bg-geometric {
+    background-image: 
+      repeating-linear-gradient(45deg, transparent, transparent 35px, hsl(165, 43%, 17%, 0.02) 35px, hsl(165, 43%, 17%, 0.02) 70px);
+  }
+
+  /* Spring Animation Classes */
+  .hover-spring {
+    transition: var(--transition-spring);
+  }
+
+  .hover-bounce {
+    transition: var(--transition-bounce);
+  }
+
+  .hover-lift {
+    @apply hover-spring;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Brutal Shadow Effect */
+  .shadow-brutal {
+    box-shadow: var(--shadow-brutal);
+  }
+
+  .shadow-brutal:hover {
+    transform: translate(4px, 4px);
+    box-shadow: 4px 4px 0px hsl(165, 43%, 17%);
+  }
+
+  /* Staggered Animation Delays */
+  .stagger-1 { animation-delay: 0.1s; }
+  .stagger-2 { animation-delay: 0.2s; }
+  .stagger-3 { animation-delay: 0.3s; }
+  .stagger-4 { animation-delay: 0.4s; }
+  .stagger-5 { animation-delay: 0.5s; }
+  .stagger-6 { animation-delay: 0.6s; }
 }
+

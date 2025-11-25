@@ -68,16 +68,16 @@ const About = () => {
   };
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 bg-background">
+    <section id="about" ref={sectionRef} className="py-24 bg-geometric bg-background">
       <div className="container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Image Carousel */}
-          <div ref={imageRef} className="relative overflow-hidden rounded-2xl shadow-elegant">
+          <div ref={imageRef} className="relative overflow-hidden rounded-2xl shadow-elegant bg-noise hover-lift">
             <div className="relative">
               {officeImages.map((image, index) => (
                 <div
                   key={index}
-                  className={`transition-opacity duration-500 ${
+                  className={`transition-opacity duration-700 ${
                     index === currentSlide ? "opacity-100" : "opacity-0 absolute inset-0"
                   }`}
                 >
@@ -95,7 +95,7 @@ const About = () => {
             <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-3">
               <button
                 onClick={handlePrevSlide}
-                className="bg-white/90 hover:bg-white text-primary rounded-full p-2 transition-all shadow-md"
+                className="bg-white/90 hover:bg-white text-primary rounded-full p-2 hover-spring hover:scale-110 shadow-md"
                 aria-label="Previous image"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -106,8 +106,8 @@ const About = () => {
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`h-2 rounded-full transition-all ${
-                      index === currentSlide ? "bg-gold w-8" : "bg-white/70 w-2"
+                    className={`h-2 rounded-full hover-spring ${
+                      index === currentSlide ? "bg-gold w-8" : "bg-white/70 w-2 hover:bg-gold/70"
                     }`}
                     aria-label={`Go to image ${index + 1}`}
                   />
@@ -116,7 +116,7 @@ const About = () => {
               
               <button
                 onClick={handleNextSlide}
-                className="bg-white/90 hover:bg-white text-primary rounded-full p-2 transition-all shadow-md"
+                className="bg-white/90 hover:bg-white text-primary rounded-full p-2 hover-spring hover:scale-110 shadow-md"
                 aria-label="Next image"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -126,50 +126,50 @@ const About = () => {
 
           {/* Content */}
           <div ref={contentRef} className="space-y-4 sm:space-y-6">
-            <div className="h-1 w-12 sm:w-16 bg-gold" />
-            <h2 className="text-primary text-2xl sm:text-3xl lg:text-4xl" style={{ fontFamily: "'Outfit', sans-serif" }}>
+            <div className="h-1 w-12 sm:w-16 bg-gold animate-fade-in" />
+            <h2 className="text-primary text-2xl sm:text-3xl lg:text-4xl font-display">
               Building Excellence Since 2005
             </h2>
-            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-sans">
               Shelter Housing Limited has been at the forefront of premium real estate development for nearly two decades. 
               Our commitment to architectural excellence, sustainable practices, and customer satisfaction has made us a 
               trusted name in luxury residential and commercial projects.
             </p>
-            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base font-sans">
               With a portfolio spanning luxury apartments, commercial towers, and exclusive villas, we bring together 
               innovative design, quality craftsmanship, and modern amenities to create spaces that inspire and endure.
             </p>
             
             <div className="grid grid-cols-2 gap-4 sm:gap-6 pt-2 sm:pt-4">
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sage mb-1 sm:mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <div className="hover-lift p-4 rounded-lg bg-sage/5">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
                   50+
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Completed Projects</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Completed Projects</div>
               </div>
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sage mb-1 sm:mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <div className="hover-lift p-4 rounded-lg bg-sage/5">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
                   10K+
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Happy Residents</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Happy Residents</div>
               </div>
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sage mb-1 sm:mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <div className="hover-lift p-4 rounded-lg bg-sage/5">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
                   15+
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Years Experience</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Years Experience</div>
               </div>
-              <div>
-                <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-sage mb-1 sm:mb-2" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <div className="hover-lift p-4 rounded-lg bg-sage/5">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2 font-display">
                   25+
                 </div>
-                <div className="text-xs sm:text-sm text-muted-foreground">Awards Won</div>
+                <div className="text-xs sm:text-sm text-muted-foreground font-mono text-mono-light">Awards Won</div>
               </div>
             </div>
 
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-white font-semibold mt-4 sm:mt-6 lg:mt-8 w-full sm:w-auto"
+              className="bg-primary hover:bg-primary/90 text-white font-semibold mt-4 sm:mt-6 lg:mt-8 w-full sm:w-auto hover-spring hover:scale-110 hover:shadow-lg"
             >
               Learn More About Us
             </Button>

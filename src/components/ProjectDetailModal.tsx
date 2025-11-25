@@ -17,7 +17,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-background">
         <DialogHeader>
-          <DialogTitle className="text-3xl font-bold text-primary" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          <DialogTitle className="text-3xl font-bold text-primary font-display">
             {project.title}
           </DialogTitle>
         </DialogHeader>

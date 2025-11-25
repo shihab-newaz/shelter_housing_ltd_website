@@ -3,10 +3,6 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import logo from "@/assets/Logo/logo.png";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -20,17 +16,6 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    // GSAP ScrollTrigger for navbar transformation
-    const navbar = document.querySelector("#navbar");
-    gsap.to(navbar, {
-      backgroundColor: isScrolled ? "rgba(25, 62, 53, 0.4)" : "transparent",
-      backdropFilter: isScrolled ? "blur(12px)" : "none",
-      duration: 0.15,
-      ease: "power2.out",
-    });
-  }, [isScrolled]);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -56,8 +41,8 @@ const Navbar = () => {
     <nav
       id="navbar"
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-150",
-        isScrolled ? "shadow-elegant" : ""
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
+        "bg-primary/80 backdrop-blur-md shadow-elegant py-2"
       )}
     >
       <div className="container mx-auto px-6 lg:px-12">
@@ -72,7 +57,7 @@ const Navbar = () => {
               src={logo}
               alt="Shelter Housing Logo"
               width={200}
-              height={200}
+              height={300}
             />
           </a>
 
@@ -83,18 +68,20 @@ const Navbar = () => {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="nav-link text-white/90 hover:text-white transition-colors text-sm font-medium tracking-wide relative group"
+                className="nav-link text-white/90 hover:text-white hover-spring transition-colors text-sm font-medium tracking-wide relative group"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sage group-hover:w-full transition-all duration-300 ease-elegant" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sage group-hover:w-full hover-spring" />
               </a>
             ))}
-            <Button
-              variant="default"
-              className="bg-gold hover:bg-gold/90 text-primary font-semibold"
-            >
-              Enquire
-            </Button>
+            <a href="tel:+8801755605072">
+              <Button
+                variant="default"
+                className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-110 hover:shadow-lg"
+              >
+                Call Us
+              </Button>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -122,12 +109,14 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <Button
-              variant="default"
-              className="w-full bg-gold hover:bg-gold/90 text-primary font-semibold"
-            >
-              Enquire
-            </Button>
+            <a href="tel:+8801755605072">
+              <Button
+                variant="default"
+                className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-110 hover:shadow-lg"
+              >
+                Call Us
+              </Button>
+            </a>
           </div>
         </div>
       )}

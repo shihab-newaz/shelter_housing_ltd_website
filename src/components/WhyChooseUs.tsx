@@ -89,7 +89,7 @@ const WhyChooseUs = () => {
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-16">
           <div className="h-1 w-16 bg-gold mx-auto mb-6" />
-          <h2 className="mb-4" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          <h2 className="mb-4 font-display">
             Why Choose Shelter Housing
           </h2>
           <p className="text-white/80 text-lg max-w-2xl mx-auto">
@@ -106,7 +106,7 @@ const WhyChooseUs = () => {
               <div className="feature-icon mb-6">
                 <feature.icon className="w-12 h-12 text-gold" strokeWidth={1.5} />
               </div>
-              <h3 className="text-xl font-bold mb-4" style={{ fontFamily: "'Outfit', sans-serif" }}>
+              <h3 className="text-xl font-bold mb-4 font-sans">
                 {feature.title}
               </h3>
               <p className="text-white/70 leading-relaxed">

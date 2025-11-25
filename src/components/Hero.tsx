@@ -73,7 +73,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" ref={heroRef} className="relative w-full h-screen overflow-hidden">
+    <section id="home" ref={heroRef} className="relative w-full h-screen overflow-hidden bg-noise">
       {/* YouTube Video Background */}
       <div ref={videoRef} className="absolute inset-0 w-full h-full">
         <YouTubeEmbed
@@ -82,35 +82,35 @@ const Hero = () => {
         />
       </div>
 
-      {/* Gradient Overlay */}
+      {/* Enhanced Gradient Overlay with Atmospheric Depth */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-gradient-hero-overlay"
+        className="absolute inset-0 bg-noise"
         style={{
-          background: "linear-gradient(180deg, rgba(23, 61, 52, 0.55) 0%, rgba(23, 61, 52, 0.25) 100%)",
+          background: "linear-gradient(180deg, rgba(23, 61, 52, 0.65) 0%, rgba(23, 61, 52, 0.35) 100%)",
         }}
       />
 
       {/* Hero Content */}
       <div ref={contentRef} className="relative z-10 container mx-auto px-6 lg:px-12 h-full flex items-center">
         <div className="max-w-4xl">
-          <h1 className="text-white mb-6 font-bold" style={{ fontFamily: "'Outfit', sans-serif" }}>
+          <h1 className="text-white mb-6 font-display font-black">
             Building Futures,<br />Creating Homes
           </h1>
-          <p className="text-white/90 text-xl md:text-2xl mb-10 max-w-2xl leading-relaxed">
+          <p className="text-white/90 text-xl md:text-2xl mb-10 max-w-2xl leading-relaxed font-sans">
             Discover luxury living spaces crafted with precision, elegance, and sustainable design principles.
           </p>
           <div className="cta-buttons flex flex-col sm:flex-row gap-4">
             <Button
               size="lg"
-              className="bg-gold hover:bg-gold/90 text-primary font-semibold text-lg px-8 py-6 shadow-hover transition-all duration-300 hover:scale-105"
+              className="bg-gold hover:bg-gold/90 text-primary font-semibold text-lg px-8 py-6 shadow-hover hover-spring hover:scale-110 hover:shadow-2xl"
             >
               Explore Projects
             </Button>
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-sage text-white hover:bg-sage/10 font-semibold text-lg px-8 py-6 backdrop-blur-sm"
+              className="border-2 border-sage text-white hover:bg-sage/20 font-semibold text-lg px-8 py-6 backdrop-blur-sm hover-spring hover:scale-105 hover:border-gold"
             >
               Learn More
             </Button>
