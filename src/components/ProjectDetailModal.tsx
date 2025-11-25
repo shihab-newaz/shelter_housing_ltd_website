@@ -1,4 +1,4 @@
-import { X } from "lucide-react";
+import { X, Download } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Project } from "@/types/project";
@@ -67,6 +67,17 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
           <div>
             <h3 className="text-lg font-semibold text-primary mb-2">About This Project</h3>
             <p className="text-muted-foreground leading-relaxed">{project.description}</p>
+            
+            {project.brochureUrl && (
+              <Button 
+                variant="outline" 
+                className="mt-4 gap-2 text-primary border-primary/20 hover:bg-primary/5"
+                onClick={() => project.brochureUrl !== "#" && window.open(project.brochureUrl, '_blank')}
+              >
+                <Download className="h-4 w-4" />
+                Download Brochure
+              </Button>
+            )}
           </div>
 
           {/* Features */}

@@ -5,8 +5,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactInfo } from "@/constants/contacts";
 import { sendContactEmail, isValidEmail, isValidPhone } from "@/lib/emailService";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -1,33 +1,42 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Eye } from "lucide-react";
+import { Eye, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { projects } from "@/constants/projects";
 import { projectFilters } from "@/constants/featuredProjects";
 import { ProjectStatus, Project } from "@/types/project";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import ProjectDetailModal from "./ProjectDetailModal";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FeaturedProjects = () => {
   const [activeFilter, setActiveFilter] = useState<ProjectStatus>("ongoing");
-  const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const carouselRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const carouselContentRef = useRef<HTMLDivElement>(null);
 
-  const filteredProjects = projects.filter((project) => project.status === activeFilter);
+  const filteredProjects = projects.filter(
+    (project) => project.status === activeFilter
+  );
+
+  // Determine alignment based on number of projects
+  const shouldCenterAlign = filteredProjects.length < 5;
 
   useEffect(() => {
-    setActiveIndex(0);
-    
     // Animate filter change
-    if (carouselRef.current) {
+    if (carouselContentRef.current) {
       gsap.fromTo(
-        carouselRef.current.children,
+        carouselContentRef.current.querySelectorAll("[data-project-card]"),
         { opacity: 0, y: 30, scale: 0.95 },
         {
           opacity: 1,
@@ -60,33 +69,22 @@ const FeaturedProjects = () => {
     }
   }, []);
 
-  const handlePrevious = () => {
-    setActiveIndex((prev) => (prev > 0 ? prev - 1 : filteredProjects.length - 1));
-  };
-
-  const handleNext = () => {
-    setActiveIndex((prev) => (prev < filteredProjects.length - 1 ? prev + 1 : 0));
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "ArrowLeft") handlePrevious();
-    if (e.key === "ArrowRight") handleNext();
-  };
-
   const handleViewDetails = (project: Project) => {
     setSelectedProject(project);
     setIsModalOpen(true);
   };
 
   return (
-    <section id="projects" ref={containerRef} className="py-24 bg-geometric bg-muted">
+    <section
+      id="projects"
+      ref={containerRef}
+      className="py-24 bg-geometric bg-muted"
+    >
       <div className="container mx-auto px-6 lg:px-12">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-primary mb-6">
-            Featured Projects
-          </h2>
-          
+          <h2 className="text-primary mb-6">Featured Projects</h2>
+
           {/* Filter Tabs */}
           <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 bg-white rounded-lg shadow-card">
             {projectFilters.map((filter) => (
@@ -107,59 +105,58 @@ const FeaturedProjects = () => {
         </div>
 
         {/* Carousel */}
-        <div
-          className="relative"
-          onKeyDown={handleKeyDown}
-          tabIndex={0}
-          role="region"
-          aria-label="Project carousel"
-        >
-          <div
-            ref={carouselRef}
-            className="flex items-center justify-center gap-3 sm:gap-6 overflow-hidden min-h-[400px] sm:min-h-[500px] px-2 sm:px-0"
+        <div className="relative">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: filteredProjects.length > 4,
+            }}
+            className="w-full mx-auto max-w-[calc(100%-6rem)] sm:max-w-[calc(100%-8rem)] lg:max-w-[calc(100%-10rem)]"
           >
-            {filteredProjects.map((project, index) => {
-              const isCenter = index === activeIndex;
-              const isPrevious = index === activeIndex - 1;
-              const isNext = index === activeIndex + 1;
-              const isVisible = isCenter || isPrevious || isNext;
-
-              return (
-                <div
+            <CarouselContent 
+              ref={carouselContentRef} 
+              className={cn(
+                "-ml-2 md:-ml-4",
+                shouldCenterAlign && "justify-center"
+              )}
+            >  {filteredProjects.map((project) => (
+                <CarouselItem
                   key={project.id}
-                  className={cn(
-                    "transition-all duration-500 ease-elegant cursor-pointer flex-shrink-0",
-                    isCenter
-                      ? "w-[85vw] sm:w-[70vw] md:w-[600px] opacity-100 scale-100 z-20"
-                      : "w-0 sm:w-[120px] md:w-[200px] opacity-40 scale-90 z-10",
-                    !isVisible && "hidden sm:block"
-                  )}
-                  onClick={() => setActiveIndex(index)}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`View ${project.title}`}
+                  className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
                 >
-                  <div className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover-lift bg-noise">
+                  <div
+                    data-project-card
+                    className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover-lift bg-noise cursor-pointer"
+                    onClick={() => handleViewDetails(project)}
+                  >
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full aspect-[16/10] object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
-                    
-                    {isCenter && (
-                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 md:p-8 text-white">
-                        <div className="h-1 w-12 sm:w-16 bg-gold mb-2 sm:mb-4 animate-fade-in" />
-                        <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
-                          {project.title}
-                        </h3>
-                        <p className="text-sm sm:text-base md:text-lg mb-1 sm:mb-2 text-white/90">{project.location}</p>
-                        <p className="text-xs sm:text-sm text-white/80 mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
-                        <div className="flex flex-wrap items-center gap-2 sm:gap-4 text-xs sm:text-sm mb-3 sm:mb-4">
-                          <span className="px-2 sm:px-3 py-1 bg-sage/30 backdrop-blur-sm rounded-full text-mono-light">{project.type}</span>
+
+                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 text-white">
+                      <div className="h-1 w-10 sm:w-12 bg-gold mb-2 sm:mb-3" />
+                      <h3 className="text-lg sm:text-xl font-bold mb-1 line-clamp-1">
+                        {project.title}
+                      </h3>
+                      <p className="text-sm mb-1 text-white/90 line-clamp-1">
+                        {project.location}
+                      </p>
+                      <p className="text-xs text-white/80 mb-3 line-clamp-2">
+                        {project.description}
+                      </p>
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
+                        <div className="flex items-center gap-2">
+                          <span className="px-2 py-1 bg-sage/30 backdrop-blur-sm rounded-full text-mono-light">
+                            {project.type}
+                          </span>
                           {project.units && (
-                            <span className="px-2 sm:px-3 py-1 bg-gold/30 backdrop-blur-sm rounded-full text-mono-light">{project.units} Units</span>
+                            <span className="px-2 py-1 bg-gold/30 backdrop-blur-sm rounded-full text-mono-light">
+                              {project.units} Units
+                            </span>
                           )}
                         </div>
                         <Button
@@ -168,57 +165,25 @@ const FeaturedProjects = () => {
                             handleViewDetails(project);
                           }}
                           size="sm"
-                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-2 hover-spring hover:scale-110 hover:shadow-lg"
+                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-1.5 hover-spring hover:scale-105 hover:shadow-lg text-xs px-3"
                         >
-                          <Eye className="h-4 w-4" />
-                          <span className="hidden sm:inline">View Details</span>
-                          <span className="sm:hidden">Details</span>
+                          <Eye className="h-3.5 w-3.5" />
+                          Details
                         </Button>
                       </div>
-                    )}
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex items-center justify-center gap-3 sm:gap-4 mt-6 sm:mt-8">
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handlePrevious}
-              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10 hover-spring hover:scale-110"
-              aria-label="Previous project"
-            >
-              <ChevronLeft className="h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
-
-            {/* Dots Indicator */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              {filteredProjects.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveIndex(index)}
-                  className={cn(
-                    "h-1.5 sm:h-2 rounded-full hover-spring",
-                    index === activeIndex ? "bg-gold w-6 sm:w-8" : "bg-sage/40 w-1.5 sm:w-2 hover:bg-sage"
-                  )}
-                  aria-label={`Go to project ${index + 1}`}
-                />
+                </CarouselItem>
               ))}
-            </div>
+            </CarouselContent>
+            <CarouselPrevious className="-left-12 sm:-left-14 lg:-left-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-10 w-10 sm:h-12 sm:w-12" />
+            <CarouselNext className="-right-12 sm:-right-14 lg:-right-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-10 w-10 sm:h-12 sm:w-12" />
+          </Carousel>
+        </div>
 
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleNext}
-              className="border-sage text-sage hover:bg-sage hover:text-white h-8 w-8 sm:h-10 sm:w-10 hover-spring hover:scale-110"
-              aria-label="Next project"
-            >
-              <ChevronRight className="h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
-          </div>
+        {/* Project count indicator */}
+        <div className="text-center mt-6 text-sm text-muted-foreground">
+          {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"} in {activeFilter} category
         </div>
       </div>
 

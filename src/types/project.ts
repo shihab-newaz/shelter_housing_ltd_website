@@ -10,4 +10,5 @@ export interface Project {
   type: string;
   units?: number;
   completionDate?: string;
+  brochureUrl?: string;
 }

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { officeImages } from "@/constants/about";
+import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 
