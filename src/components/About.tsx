@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { officeImages } from "@/constants/about";
+import { COMPANY_STATS, CRAFTING_TEXT, YEARS_OF_EXPERIENCE } from "@/constants/time";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -58,9 +59,20 @@ const About = () => {
   };
 
   return (
-    <section id="about" ref={sectionRef} className="py-24 bg-geometric bg-background">
-      <div className="container mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+    <section id="about" ref={sectionRef} className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-geometric bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
+        {/* Section Header */}
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12 xl:mb-16">
+          <div className="h-1 w-12 sm:w-16 bg-gold mx-auto mb-4 sm:mb-6" />
+          <h2 className="text-primary mb-2 sm:mb-4">
+            About Us
+          </h2>
+          <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
+            Discover our journey, expertise, and commitment to excellence in luxury real estate
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
           {/* Image Carousel */}
           <div ref={imageRef} className="relative overflow-hidden rounded-2xl shadow-elegant bg-noise hover-lift">
             <div className="relative">
@@ -82,22 +94,22 @@ const About = () => {
             </div>
             
             {/* Carousel Controls */}
-            <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-3">
+            <div className="absolute bottom-4 left-0 right-0 flex items-center justify-center gap-3 sm:gap-4">
               <button
                 onClick={handlePrevSlide}
-                className="bg-white/90 hover:bg-white text-primary rounded-full p-2 hover-spring hover:scale-110 shadow-md"
+                className="bg-white/90 hover:bg-white text-primary rounded-full p-2.5 sm:p-2 hover-spring hover:scale-110 active:scale-95 shadow-md touch-feedback"
                 aria-label="Previous image"
               >
-                <ChevronLeft className="h-5 w-5" />
+                <ChevronLeft className="h-5 w-5 sm:h-5 sm:w-5" />
               </button>
               
-              <div className="flex gap-2">
+              <div className="flex gap-3 sm:gap-2">
                 {officeImages.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => setCurrentSlide(index)}
-                    className={`h-2 rounded-full hover-spring ${
-                      index === currentSlide ? "bg-gold w-8" : "bg-white/70 w-2 hover:bg-gold/70"
+                    className={`h-3 sm:h-2 rounded-full hover-spring touch-feedback ${
+                      index === currentSlide ? "bg-gold w-10 sm:w-8" : "bg-white/70 w-3 sm:w-2 hover:bg-gold/70"
                     }`}
                     aria-label={`Go to image ${index + 1}`}
                   />
@@ -106,10 +118,10 @@ const About = () => {
               
               <button
                 onClick={handleNextSlide}
-                className="bg-white/90 hover:bg-white text-primary rounded-full p-2 hover-spring hover:scale-110 shadow-md"
+                className="bg-white/90 hover:bg-white text-primary rounded-full p-2.5 sm:p-2 hover-spring hover:scale-110 active:scale-95 shadow-md touch-feedback"
                 aria-label="Next image"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-5 w-5 sm:h-5 sm:w-5" />
               </button>
             </div>
           </div>
@@ -118,7 +130,7 @@ const About = () => {
           <div ref={contentRef} className="space-y-4 sm:space-y-6">
             <div className="h-1 w-12 sm:w-16 bg-gold animate-fade-in" />
             <h2 className="text-primary text-2xl sm:text-3xl lg:text-4xl ">
-              Crafting Luxury Living Since 1995
+              {CRAFTING_TEXT}
             </h2>
             <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
               Shelter Housing Bangladesh has been a pioneer in premium real estate development within Dhaka for nearly three decades. 
@@ -134,19 +146,19 @@ const About = () => {
             <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-2 sm:pt-4">
               <div className="hover-lift p-4 rounded-lg bg-sage/5">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2">
-                  25+
+                  {COMPANY_STATS.completed_projects}+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground text-mono-light">Completed Projects</div>
               </div>
               <div className="hover-lift p-4 rounded-lg bg-sage/5">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2">
-                  500+
+                  {COMPANY_STATS.happy_residents}+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground text-mono-light">Happy Residents</div>
               </div>
               <div className="hover-lift p-4 rounded-lg bg-sage/5">
                 <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-sage mb-1 sm:mb-2">
-                  29+
+                  {YEARS_OF_EXPERIENCE}+
                 </div>
                 <div className="text-xs sm:text-sm text-muted-foreground text-mono-light">Years Experience</div>
               </div>
@@ -154,7 +166,7 @@ const About = () => {
 
             <Button
               size="lg"
-              className="bg-primary hover:bg-primary/90 text-white font-semibold mt-4 sm:mt-6 lg:mt-8 w-full sm:w-auto hover-spring hover:scale-110 hover:shadow-lg"
+              className="bg-primary hover:bg-primary/90 text-white font-semibold mt-4 sm:mt-6 lg:mt-8 w-full sm:w-auto hover-spring hover:scale-105 sm:hover:scale-110 hover:shadow-lg active:scale-95 touch-feedback"
             >
               Learn More About Us
             </Button>

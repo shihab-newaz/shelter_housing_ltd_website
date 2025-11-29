@@ -120,10 +120,10 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" ref={sectionRef} className="py-24 bg-background">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section id="contact" ref={sectionRef} className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-background">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8 sm:mb-10 lg:mb-12 xl:mb-16">
             <div className="h-1 w-16 bg-gold mx-auto mb-6" />
             <h2 className="text-primary mb-4">
               Get In Touch
@@ -133,9 +133,9 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 sm:gap-10 lg:gap-12">
             {/* Contact Info */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {contactInfo.map((info) => {
                 const Icon = info.icon;
                 return (
@@ -244,7 +244,7 @@ const Contact = () => {
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="w-full md:w-auto bg-gold hover:bg-gold/90 text-primary font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full md:w-auto bg-gold hover:bg-gold/90 text-primary font-semibold disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 touch-feedback"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">

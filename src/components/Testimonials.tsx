@@ -49,18 +49,18 @@ const Testimonials = () => {
   }, [activeIndex, testimonials.length]);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-muted">
-      <div className="container mx-auto px-6 lg:px-12">
+    <section ref={sectionRef} className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-muted">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         <div className="max-w-4xl mx-auto text-center">
-          <div className="h-1 w-16 bg-gold mx-auto mb-6" />
-          <h2 className="text-primary mb-16">
+          <div className="h-1 w-12 sm:w-16 bg-gold mx-auto mb-4 sm:mb-6" />
+          <h2 className="text-primary mb-8 sm:mb-12 lg:mb-16">
             What Our Clients Say
           </h2>
 
           <div ref={quoteRef} className="relative">
-            <Quote className="w-16 h-16 text-sage/20 absolute -top-8 left-1/2 -translate-x-1/2" />
+            <Quote className="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 text-sage/20 absolute -top-4 sm:-top-6 lg:-top-8 left-1/2 -translate-x-1/2" />
             
-            <blockquote className="text-2xl md:text-3xl text-primary font-medium mb-8 leading-relaxed italic">
+            <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl text-primary font-medium mb-6 sm:mb-8 leading-relaxed italic pt-4 sm:pt-0">
               "{testimonials[activeIndex].quote}"
             </blockquote>
 
@@ -75,14 +75,14 @@ const Testimonials = () => {
           </div>
 
           {/* Dots Navigation */}
-          <div className="flex items-center justify-center gap-3 mt-12">
+          <div className="flex items-center justify-center gap-4 sm:gap-3 mt-8 sm:mt-10 lg:mt-12">
             {testimonials.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
                 className={cn(
-                  "w-3 h-3 rounded-full transition-all duration-300",
-                  index === activeIndex ? "bg-gold w-10" : "bg-sage/30"
+                  "h-4 sm:h-3 rounded-full transition-all duration-300 touch-feedback",
+                  index === activeIndex ? "bg-gold w-12 sm:w-10" : "bg-sage/30 w-4 sm:w-3"
                 )}
                 aria-label={`View testimonial ${index + 1}`}
               />

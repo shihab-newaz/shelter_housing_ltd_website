@@ -1,12 +1,13 @@
 import { footerLinks, socialLinks } from "@/constants/footer";
+import { FOUNDING_YEAR_TEXT } from "@/constants/time";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-primary text-white">
-      <div className="container mx-auto px-6 lg:px-12 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 py-10 sm:py-12 lg:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 mb-8 sm:mb-10 lg:mb-12">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="text-2xl font-bold mb-4">
@@ -14,15 +15,15 @@ const Footer = () => {
               <span className="text-white"> HOUSING LIMITED</span>
             </div>
             <p className="text-white/70 mb-6 max-w-md">
-              Building exceptional residential homes in Dhaka since 1995. Your trusted partner in premium real estate development.
+              {FOUNDING_YEAR_TEXT}. Your trusted partner in premium real estate development.
             </p>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 sm:gap-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-primary transition-all duration-300"
+                  className="w-11 h-11 sm:w-10 sm:h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-primary transition-all duration-300 active:scale-95 touch-feedback"
                 >
                   <social.icon className="w-5 h-5" />
                 </a>

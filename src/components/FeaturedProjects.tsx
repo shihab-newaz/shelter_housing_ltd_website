@@ -78,11 +78,11 @@ const FeaturedProjects = () => {
     <section
       id="projects"
       ref={containerRef}
-      className="py-24 bg-geometric bg-muted"
+      className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-geometric bg-muted"
     >
-      <div className="container mx-auto px-6 lg:px-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12 xl:mb-16">
           <h2 className="text-primary mb-6">Featured Projects</h2>
 
           {/* Filter Tabs */}
@@ -92,10 +92,10 @@ const FeaturedProjects = () => {
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
                 className={cn(
-                  "px-4 sm:px-6 py-2 sm:py-3 rounded-md font-semibold hover-spring text-xs sm:text-sm md:text-base",
+                  "px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-semibold hover-spring text-xs sm:text-sm md:text-base touch-feedback",
                   activeFilter === filter.value
                     ? "bg-gold text-primary shadow-md scale-105"
-                    : "text-muted-foreground hover:text-primary hover:bg-sage/20 hover:scale-105"
+                    : "text-muted-foreground hover:text-primary hover:bg-sage/20 hover:scale-105 active:scale-95"
                 )}
               >
                 {filter.label}
@@ -165,7 +165,7 @@ const FeaturedProjects = () => {
                             handleViewDetails(project);
                           }}
                           size="sm"
-                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-1.5 hover-spring hover:scale-105 hover:shadow-lg text-xs px-3"
+                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-1.5 hover-spring hover:scale-105 hover:shadow-lg text-xs px-3 py-2 active:scale-95 touch-feedback"
                         >
                           <Eye className="h-3.5 w-3.5" />
                           Details
@@ -176,8 +176,8 @@ const FeaturedProjects = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="-left-12 sm:-left-14 lg:-left-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-10 w-10 sm:h-12 sm:w-12" />
-            <CarouselNext className="-right-12 sm:-right-14 lg:-right-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-10 w-10 sm:h-12 sm:w-12" />
+            <CarouselPrevious className="-left-10 sm:-left-14 lg:-left-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-11 w-11 sm:h-12 sm:w-12 active:scale-95 touch-feedback" />
+            <CarouselNext className="-right-10 sm:-right-14 lg:-right-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-11 w-11 sm:h-12 sm:w-12 active:scale-95 touch-feedback" />
           </Carousel>
         </div>
 

@@ -70,7 +70,7 @@ const Navbar = () => {
             <a href="tel:+8801755605072">
               <Button
                 variant="default"
-                className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-110 hover:shadow-lg"
+                className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-105 lg:hover:scale-110 hover:shadow-lg active:scale-95 touch-feedback"
               >
                 Call Us
               </Button>
@@ -80,7 +80,7 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden text-white p-2"
+            className="lg:hidden text-white p-3 -mr-2 touch-feedback active:scale-95"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -91,21 +91,21 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="lg:hidden bg-primary border-t border-sage/20 animate-fade-in">
-          <div className="container mx-auto px-6 py-6 space-y-4">
+          <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 space-y-1">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="block text-white/90 hover:text-white transition-colors py-2 font-medium"
+                className="block text-white/90 hover:text-white transition-colors py-3 px-2 font-medium rounded-md hover:bg-white/10 active:bg-white/20 touch-feedback"
               >
                 {link.name}
               </a>
             ))}
-            <a href="tel:+09617335588">
+            <a href="tel:+09617335588" className="block pt-2">
               <Button
                 variant="default"
-                className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-110 hover:shadow-lg"
+                className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-105 hover:shadow-lg w-full sm:w-auto active:scale-95 touch-feedback"
               >
                 Call Us
               </Button>

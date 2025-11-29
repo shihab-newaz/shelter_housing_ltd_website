@@ -1,16 +1,37 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import YouTubeEmbed from "@/utils/YouTubeEmbed";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// YouTube thumbnail as placeholder before video loads
+const VIDEO_ID = "cBPAdYMjTA8";
+const THUMBNAIL_URL = `https://img.youtube.com/vi/${VIDEO_ID}/maxresdefault.jpg`;
+
 const Hero = () => {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  // Lazy load video after initial paint
+  useEffect(() => {
+    const loadVideo = () => {
+      setIsVideoLoaded(true);
+    };
+
+    // Use requestIdleCallback for better performance, fallback to setTimeout
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(loadVideo, { timeout: 2000 });
+    } else {
+      const timer = setTimeout(loadVideo, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -73,13 +94,24 @@ const Hero = () => {
   }, []);
 
   return (
-    <section id="home" ref={heroRef} className="relative w-full h-screen overflow-hidden bg-noise">
-      {/* YouTube Video Background */}
+    <section id="home" ref={heroRef} className="relative w-full min-h-[100dvh] overflow-hidden bg-noise">
+      {/* Video Background with Lazy Loading */}
       <div ref={videoRef} className="absolute inset-0 w-full h-full">
-        <YouTubeEmbed
-          videoId="cBPAdYMjTA8"
-          title="Luxury Real Estate Showcase"
+        {/* Placeholder thumbnail */}
+        <img
+          src={THUMBNAIL_URL}
+          alt="Luxury Real Estate Background"
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-700 ${
+            isVideoLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
         />
+        {/* YouTube Video - loads after initial paint */}
+        {isVideoLoaded && (
+          <YouTubeEmbed
+            videoId={VIDEO_ID}
+            title="Luxury Real Estate Showcase"
+          />
+        )}
       </div>
 
       {/* Enhanced Gradient Overlay with Atmospheric Depth */}
@@ -92,19 +124,18 @@ const Hero = () => {
       />
 
       {/* Hero Content */}
-      <div ref={contentRef} className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full flex items-center">
-        <div className="max-w-5xl w-full">
-          <h1 className="text-white mb-6 font-black">
+      <div ref={contentRef} className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full min-h-[100dvh] flex items-center">
+        <div className="max-w-full sm:max-w-4xl lg:max-w-5xl w-full">
+          <h1 className="text-white mb-4 sm:mb-6 font-black">
             Creating Homes,<br /> Defining Skylines.
           </h1>
-          <p className="text-white/90 text-xl md:text-2xl mb-10 max-w-2xl leading-relaxed">
+          <p className="text-white/90 text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 lg:mb-10 max-w-2xl leading-relaxed">
             Discover luxury living spaces crafted with precision, elegance, and sustainable design principles.
           </p>
-          <div className="cta-buttons flex flex-col sm:flex-row gap-4">
+          <div className="cta-buttons flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button
-
               size="lg"
-              className="bg-gold hover:bg-gold/90 text-primary font-semibold text-lg px-8 py-6 shadow-hover hover-spring hover:scale-110 hover:shadow-2xl"
+              className="bg-gold hover:bg-gold/90 text-primary font-semibold text-base sm:text-lg px-6 py-4 sm:px-8 sm:py-6 shadow-hover hover-spring hover:scale-105 sm:hover:scale-110 hover:shadow-2xl active:scale-95 touch-feedback"
             >
               <a href="#projects">
                 Explore Projects
@@ -113,7 +144,7 @@ const Hero = () => {
             <Button
               size="lg"
               variant="outline"
-              className="border-2 border-sage text-white hover:bg-sage/20 font-semibold text-lg px-8 py-6 backdrop-blur-sm hover-spring hover:scale-105 hover:border-gold"
+              className="border-2 border-sage text-white hover:bg-sage/20 font-semibold text-base sm:text-lg px-6 py-4 sm:px-8 sm:py-6 backdrop-blur-sm hover-spring hover:scale-105 hover:border-gold active:scale-95 touch-feedback"
             >
               <a href="#about">
                 Learn More
@@ -122,6 +153,16 @@ const Hero = () => {
           </div>
         </div>
       </div>
+
+      {/* Scroll Indicator */}
+      <a 
+        href="#projects" 
+        className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors group"
+        aria-label="Scroll to projects"
+      >
+        <span className="text-xs sm:text-sm font-medium tracking-wider uppercase hidden sm:block"></span>
+        <ChevronDown className="w-6 h-6 sm:w-8 sm:h-8 animate-scroll-bounce group-hover:text-gold transition-colors" />
+      </a>
     </section>
   );
 };

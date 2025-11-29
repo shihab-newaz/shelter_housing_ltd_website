@@ -19,7 +19,7 @@
     /* Primary: Deep Green #173d34 */
     --primary: 165 43% 17%;
     --primary-foreground: 0 0% 100%;
-    
+
     /* Sage Green #8eb69b */
     --sage: 145 27% 63%;
     --sage-foreground: 165 43% 17%;
@@ -48,50 +48,70 @@
     --radius: 0.5rem;
 
     /* Gradients - Layered & Atmospheric */
-    --gradient-primary: linear-gradient(135deg, hsl(165, 43%, 17%) 0%, hsl(145, 27%, 63%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(26, 35%, 33%) 0%, hsl(40, 40%, 69%) 100%);
-    --gradient-hero-overlay: linear-gradient(180deg, rgba(23, 61, 52, 0.65) 0%, rgba(23, 61, 52, 0.35) 100%);
-    --gradient-atmospheric: linear-gradient(180deg, 
-      hsl(165, 43%, 17%) 0%, 
-      hsl(165, 40%, 20%) 50%, 
-      hsl(165, 43%, 17%) 100%);
-    
+    --gradient-primary: linear-gradient(
+      135deg,
+      hsl(165, 43%, 17%) 0%,
+      hsl(145, 27%, 63%) 100%
+    );
+    --gradient-secondary: linear-gradient(
+      135deg,
+      hsl(26, 35%, 33%) 0%,
+      hsl(40, 40%, 69%) 100%
+    );
+    --gradient-hero-overlay: linear-gradient(
+      180deg,
+      rgba(23, 61, 52, 0.65) 0%,
+      rgba(23, 61, 52, 0.35) 100%
+    );
+    --gradient-atmospheric: linear-gradient(
+      180deg,
+      hsl(165, 43%, 17%) 0%,
+      hsl(165, 40%, 20%) 50%,
+      hsl(165, 43%, 17%) 100%
+    );
+
     /* Shadows - Elegant & Layered */
     --shadow-elegant: 0 10px 40px -10px hsl(165, 43%, 17%, 0.15);
     --shadow-card: 0 4px 20px -4px hsl(165, 43%, 17%, 0.08);
     --shadow-hover: 0 20px 60px -15px hsl(165, 43%, 17%, 0.25);
     --shadow-brutal: 8px 8px 0px hsl(165, 43%, 17%);
-    
+
     /* Transitions - Spring Physics */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-elegant: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     --transition-spring: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     --transition-bounce: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    
+
     /* Typography - Active Fonts */
-    --font-display: var(--font-header-4); /* Change to --font-header-2, --font-header-3, etc. */
-    --font-sans: var(--font-body-4); /* Change to --font-body-2, --font-body-3, etc. */
-    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: var(
+      --font-header-8
+    ); /* Change to --font-header-2, --font-header-3, etc. */
+    --font-sans: var(
+      --font-body-3
+    ); /* Change to --font-body-2, --font-body-3, etc. */
+    --font-mono: "JetBrains Mono", monospace;
 
     /* Header Font Options - Try these one by one */
-    --font-header-1: 'Playfair Display', serif;      /* Elegant serif */
-    --font-header-2: 'Syne', sans-serif;             /* Bold modern */
-    --font-header-3: 'Space Grotesk', sans-serif;    /* Tech geometric */
-    --font-header-4: 'Georgia', serif;               /* Classic serif */
-    --font-header-5: 'Bebas Neue', sans-serif;       /* Impactful display */
-    --font-header-6: 'Cormorant Garamond', serif;    /* Luxury editorial */
-    --font-header-7: 'Montserrat', sans-serif;       /* Clean modern */
-    --font-header-8: 'Libre Baskerville', serif;     /* Traditional elegance */
+    --font-header-1: "Playfair Display", serif; /* Elegant serif */
+    --font-header-2: "Syne", sans-serif; /* Bold modern */
+    --font-header-3: "Space Grotesk", sans-serif; /* Tech geometric */
+    --font-header-4: "Poppins", sans-serif; /* Modern rounded */
+    --font-header-5: "Bebas Neue", sans-serif; /* Impactful display */
+    --font-header-6: "Outfit", sans-serif; /* Contemporary geometric */
+    --font-header-7: "Clash Display", sans-serif; /* Bold futuristic */
+    --font-header-8: "Manrope", sans-serif; /* Sleek minimal */
+    --font-header-9: "DM Sans", sans-serif; /* Clean humanist */
+    --font-header-10: "Inter Tight", sans-serif; /* Geometric sans */
 
     /* Body Font Options - Try these one by one */
-    --font-body-1: 'Space Grotesk', sans-serif;      /* Geometric modern */
-    --font-body-2: 'Inter', sans-serif;              /* Clean readable */
-    --font-body-3: 'Lora', serif;                    /* Elegant serif */
-    --font-body-4: 'Source Sans Pro', sans-serif;   /* Professional */
-    --font-body-5: 'Raleway', sans-serif;            /* Sleek modern */
-    --font-body-6: 'Merriweather', serif;            /* Warm readable */
-    --font-body-7: 'Nunito', sans-serif;             /* Friendly rounded */
-    --font-body-8: 'Open Sans', sans-serif;          /* Universal */
+    --font-body-1: "Space Grotesk", sans-serif; /* Geometric modern */
+    --font-body-2: "Inter", sans-serif; /* Clean readable */
+    --font-body-3: "Plus Jakarta Sans", sans-serif; /* Contemporary sans */
+    --font-body-4: "Poppins", sans-serif; /* Modern rounded */
+    --font-body-5: "Outfit", sans-serif; /* Geometric readable */
+    --font-body-6: "JetBrains Mono", monospace; /* Technical clarity */
+    --font-body-7: "DM Mono", monospace; /* Minimal monospace */
+    --font-body-8: "Fira Sans", sans-serif; /* Humanist sans */
   }
 
   .dark {
@@ -135,52 +155,65 @@
     font-family: var(--font-sans);
     font-feature-settings: "kern" 1, "liga" 1;
     /* Subtle noise texture for atmospheric depth */
-    background-image: 
-      radial-gradient(circle at 25% 25%, hsl(145, 27%, 63%, 0.03) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, hsl(40, 40%, 69%, 0.03) 0%, transparent 50%);
+    background-image: radial-gradient(
+        circle at 25% 25%,
+        hsl(145, 27%, 63%, 0.03) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        hsl(40, 40%, 69%, 0.03) 0%,
+        transparent 50%
+      );
   }
 
   /* Typography System - Character Over Neutrality */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: var(--font-display);
     @apply font-bold tracking-tight;
   }
 
   h1 {
-    @apply text-4xl md:text-6xl lg:text-7xl xl:text-8xl;
+    @apply text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl;
     line-height: 1.1;
     font-weight: 900;
     letter-spacing: -0.02em;
   }
 
   h2 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl;
     line-height: 1.1;
     font-weight: 800;
     letter-spacing: -0.01em;
   }
 
   h3 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl;
     line-height: 1.15;
     font-weight: 700;
   }
 
   h4 {
     font-family: var(--font-sans);
-    @apply text-2xl md:text-3xl;
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl;
     font-weight: 700;
   }
 
   h5 {
     font-family: var(--font-sans);
-    @apply text-xl md:text-2xl;
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl;
     font-weight: 600;
   }
 
-  p, a {
+  p,
+  a {
     font-family: var(--font-sans);
-    @apply text-base md:text-lg leading-relaxed;
+    @apply text-sm sm:text-base md:text-lg leading-relaxed;
     font-weight: 400;
   }
 
@@ -207,9 +240,9 @@
   .bg-noise {
     position: relative;
   }
-  
+
   .bg-noise::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     opacity: 0.03;
@@ -224,19 +257,31 @@
   }
 
   .bg-atmospheric::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: 
-      radial-gradient(circle at 20% 20%, hsl(145, 27%, 63%, 0.1) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, hsl(40, 40%, 69%, 0.1) 0%, transparent 50%);
+    background: radial-gradient(
+        circle at 20% 20%,
+        hsl(145, 27%, 63%, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 80% 80%,
+        hsl(40, 40%, 69%, 0.1) 0%,
+        transparent 50%
+      );
     pointer-events: none;
   }
 
   /* Geometric Pattern Background */
   .bg-geometric {
-    background-image: 
-      repeating-linear-gradient(45deg, transparent, transparent 35px, hsl(165, 43%, 17%, 0.02) 35px, hsl(165, 43%, 17%, 0.02) 70px);
+    background-image: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 35px,
+      hsl(165, 43%, 17%, 0.02) 35px,
+      hsl(165, 43%, 17%, 0.02) 70px
+    );
   }
 
   /* Spring Animation Classes */
@@ -268,11 +313,61 @@
   }
 
   /* Staggered Animation Delays */
-  .stagger-1 { animation-delay: 0.1s; }
-  .stagger-2 { animation-delay: 0.2s; }
-  .stagger-3 { animation-delay: 0.3s; }
-  .stagger-4 { animation-delay: 0.4s; }
-  .stagger-5 { animation-delay: 0.5s; }
-  .stagger-6 { animation-delay: 0.6s; }
-}
+  .stagger-1 {
+    animation-delay: 0.1s;
+  }
+  .stagger-2 {
+    animation-delay: 0.2s;
+  }
+  .stagger-3 {
+    animation-delay: 0.3s;
+  }
+  .stagger-4 {
+    animation-delay: 0.4s;
+  }
+  .stagger-5 {
+    animation-delay: 0.5s;
+  }
+  .stagger-6 {
+    animation-delay: 0.6s;
+  }
 
+  /* Mobile-First Section Utilities */
+  .section-padding {
+    @apply py-12 sm:py-16 lg:py-20 xl:py-24;
+  }
+
+  .section-margin {
+    @apply mb-8 sm:mb-10 lg:mb-12 xl:mb-16;
+  }
+
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-12;
+  }
+
+  /* Touch Feedback States */
+  .touch-feedback {
+    @apply active:scale-95 active:opacity-90 transition-transform;
+  }
+
+  /* Scroll Indicator Animation */
+  @keyframes scroll-bounce {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0) translateX(-50%);
+    }
+    40% {
+      transform: translateY(-8px) translateX(-50%);
+    }
+    60% {
+      transform: translateY(-4px) translateX(-50%);
+    }
+  }
+
+  .animate-scroll-bounce {
+    animation: scroll-bounce 2s infinite;
+  }
+}
