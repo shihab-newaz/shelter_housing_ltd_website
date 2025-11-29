@@ -13,6 +13,7 @@ import { projects } from "@/constants/projects";
 import { projectFilters } from "@/constants/featuredProjects";
 import { ProjectStatus, Project } from "@/types/project";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useIsMobile } from "@/hooks/use-mobile";
 import ProjectDetailModal from "./ProjectDetailModal";
 import gsap from "gsap";
 
@@ -24,6 +25,7 @@ const FeaturedProjects = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const carouselContentRef = useRef<HTMLDivElement>(null);
+  const isMobile = useIsMobile();
 
   const filteredProjects = projects.filter(
     (project) => project.status === activeFilter
@@ -33,7 +35,11 @@ const FeaturedProjects = () => {
   const shouldCenterAlign = filteredProjects.length < 5;
 
   useEffect(() => {
-    // Animate filter change
+    // Skip animations on mobile for better performance
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (isMobile || prefersReducedMotion) return;
+
+    // Animate filter change (desktop only)
     if (carouselContentRef.current) {
       gsap.fromTo(
         carouselContentRef.current.querySelectorAll("[data-project-card]"),
@@ -48,7 +54,7 @@ const FeaturedProjects = () => {
         }
       );
     }
-  }, [activeFilter]);
+  }, [activeFilter, isMobile]);
 
   useEffect(() => {
     // Scroll-triggered animation for section entrance
@@ -132,7 +138,7 @@ const FeaturedProjects = () => {
                     <img
                       src={project.image}
                       alt={project.title}
-                      className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                      className="w-full aspect-[2/3] object-cover transition-transform duration-500 group-hover:scale-[1.05]"
                       loading="lazy"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
@@ -145,20 +151,17 @@ const FeaturedProjects = () => {
                       <p className="text-sm mb-1 text-white/90 line-clamp-1">
                         {project.location}
                       </p>
-                      <p className="text-xs text-white/80 mb-3 line-clamp-2">
-                        {project.description}
-                      </p>
+                      {(project.buildingHeight || project.landArea) && (
+                        <p className="text-xs text-white/80 mb-3">
+                          {project.buildingHeight}{project.buildingHeight && project.landArea && " • "}{project.landArea}
+                        </p>
+                      )}
                       <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                        <div className="flex items-center gap-2">
-                          <span className="px-2 py-1 bg-sage/30 backdrop-blur-sm rounded-full text-mono-light">
-                            {project.type}
+                        {project.units && (
+                          <span className="px-2 py-1 bg-gold/30 backdrop-blur-sm rounded-full text-mono-light">
+                            {project.units} Units
                           </span>
-                          {project.units && (
-                            <span className="px-2 py-1 bg-gold/30 backdrop-blur-sm rounded-full text-mono-light">
-                              {project.units} Units
-                            </span>
-                          )}
-                        </div>
+                        )}
                         <Button
                           onClick={(e) => {
                             e.stopPropagation();

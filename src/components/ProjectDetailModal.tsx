@@ -28,11 +28,10 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
             <img
               src={project.image}
               alt={project.title}
-              className="w-full aspect-[4/3] sm:aspect-[16/9] object-cover"
+              className="w-full max-h-[50vh] sm:max-h-[60vh] object-cover object-top"
             />
-            <div className="absolute top-2 right-2 sm:top-4 sm:right-4 flex flex-wrap gap-1.5 sm:gap-2">
-              <Badge className="bg-sage text-white text-xs sm:text-sm">{project.status}</Badge>
-              <Badge className="bg-gold text-primary text-xs sm:text-sm">{project.type}</Badge>
+            <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
+              <Badge className="bg-sage text-white text-xs sm:text-sm capitalize">{project.status}</Badge>
             </div>
           </div>
 
@@ -43,10 +42,24 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
               <p className="text-muted-foreground text-sm sm:text-base">{project.location}</p>
             </div>
             
+            {project.landArea && (
+              <div>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Land Area</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">{project.landArea}</p>
+              </div>
+            )}
+
+            {project.buildingHeight && (
+              <div>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Building Height</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">{project.buildingHeight}</p>
+              </div>
+            )}
+
             {project.units && (
               <div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Total Units</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.units} Residential Units</p>
+                <p className="text-muted-foreground text-sm sm:text-base">{project.units} Units</p>
               </div>
             )}
 
@@ -63,22 +76,33 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
             </div>
           </div>
 
-          {/* Description */}
-          <div>
-            <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">About This Project</h3>
-            <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{project.description}</p>
-            
-            {project.brochureUrl && (
+          {/* Flat Sizes */}
+          {project.flatSizes && project.flatSizes.length > 0 && (
+            <div>
+              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-2 sm:mb-3">Flat Sizes</h3>
+              <div className="flex flex-wrap gap-2">
+                {project.flatSizes.map((size, index) => (
+                  <span key={index} className="px-3 py-1.5 bg-sage/10 text-primary rounded-full text-sm">
+                    {size}
+                  </span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Brochure Download */}
+          {project.brochureUrl && (
+            <div>
               <Button 
                 variant="outline" 
-                className="mt-3 sm:mt-4 gap-2 text-primary border-primary/20 hover:bg-primary/5 w-full sm:w-auto active:scale-95 touch-feedback"
+                className="gap-2 text-primary border-primary/20 hover:bg-primary/5 w-full sm:w-auto active:scale-95 touch-feedback"
                 onClick={() => project.brochureUrl !== "#" && window.open(project.brochureUrl, '_blank')}
               >
                 <Download className="h-4 w-4" />
                 Download Brochure
               </Button>
-            )}
-          </div>
+            </div>
+          )}
 
           {/* Features */}
           <div>
