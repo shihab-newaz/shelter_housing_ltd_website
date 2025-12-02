@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Eye, Download } from "lucide-react";
+import { Eye, Download, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -20,7 +20,7 @@ import gsap from "gsap";
 gsap.registerPlugin(ScrollTrigger);
 
 const FeaturedProjects = () => {
-  const [activeFilter, setActiveFilter] = useState<ProjectStatus>("ongoing");
+  const [activeFilter, setActiveFilter] = useState<ProjectStatus>(ProjectStatus.ONGOING);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -119,65 +119,62 @@ const FeaturedProjects = () => {
             }}
             className="w-full mx-auto max-w-[calc(100%-6rem)] sm:max-w-[calc(100%-8rem)] lg:max-w-[calc(100%-10rem)]"
           >
-            <CarouselContent 
-              ref={carouselContentRef} 
+            <CarouselContent
+              ref={carouselContentRef}
               className={cn(
                 "-ml-2 md:-ml-4",
                 shouldCenterAlign && "justify-center"
               )}
             >  {filteredProjects.map((project) => (
-                <CarouselItem
-                  key={project.id}
-                  className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+              <CarouselItem
+                key={project.id}
+                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+              >
+                <div
+                  data-project-card
+                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover-lift bg-noise cursor-pointer h-full"
+                  onClick={() => handleViewDetails(project)}
                 >
-                  <div
-                    data-project-card
-                    className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover-lift bg-noise cursor-pointer"
-                    onClick={() => handleViewDetails(project)}
-                  >
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full aspect-[2/3] object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/90 via-primary/40 to-transparent opacity-80 group-hover:opacity-95 transition-opacity" />
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full aspect-[3/4] sm:aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-90 transition-opacity duration-300" />
 
-                    <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-5 text-white">
-                      <div className="h-1 w-10 sm:w-12 bg-gold mb-2 sm:mb-3" />
-                      <h3 className="text-lg sm:text-xl font-bold mb-1 line-clamp-1">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm mb-1 text-white/90 line-clamp-1">
-                        {project.location}
-                      </p>
-                      {(project.buildingHeight || project.landArea) && (
-                        <p className="text-xs text-white/80 mb-3">
-                          {project.buildingHeight}{project.buildingHeight && project.landArea && " • "}{project.landArea}
+                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white flex flex-col">
+                    <div className="h-1 w-16 bg-gold mb-3 rounded-full" />
+
+                    <h3 className="text-lg sm:text-xl font-bold mb-3 leading-tight tracking-tight line-clamp-2">
+                      {project.title}
+                    </h3>
+
+                    <div className="mt-auto grid grid-cols-[1fr,auto] gap-3 items-end border-t border-white/20 pt-4">
+                      <div className="flex flex-col gap-1">
+                        <div className="flex items-center gap-1.5 text-gold">
+                          <MapPin className="h-4 w-4" />
+                          <span className="text-xs font-bold uppercase tracking-wider">Location</span>
+                        </div>
+                        <p className="text-base sm:text-lg font-medium text-white/95 line-clamp-1">
+                          {project.location || "Dhaka"}
                         </p>
-                      )}
-                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs">
-                        {project.units && (
-                          <span className="px-2 py-1 bg-gold/30 backdrop-blur-sm rounded-full text-mono-light">
-                            {project.units} Units
-                          </span>
-                        )}
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleViewDetails(project);
-                          }}
-                          size="sm"
-                          className="bg-gold hover:bg-gold/90 text-primary font-semibold gap-1.5 hover-spring hover:scale-105 hover:shadow-lg text-xs px-3 py-2 active:scale-95 touch-feedback"
-                        >
-                          <Eye className="h-3.5 w-3.5" />
-                          Details
-                        </Button>
                       </div>
+
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleViewDetails(project);
+                        }}
+                        className="bg-gold hover:bg-gold/90 text-primary font-bold hover-spring hover:scale-105 shadow-lg active:scale-95 h-10 px-5"
+                      >
+                        Details
+                      </Button>
                     </div>
                   </div>
-                </CarouselItem>
-              ))}
+                </div>
+              </CarouselItem>
+            ))}
             </CarouselContent>
             <CarouselPrevious className="-left-10 sm:-left-14 lg:-left-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-11 w-11 sm:h-12 sm:w-12 active:scale-95 touch-feedback" />
             <CarouselNext className="-right-10 sm:-right-14 lg:-right-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-11 w-11 sm:h-12 sm:w-12 active:scale-95 touch-feedback" />
@@ -188,15 +185,15 @@ const FeaturedProjects = () => {
         <div className="text-center mt-6 text-sm text-muted-foreground">
           {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"} in {activeFilter} category
         </div>
-      </div>
+      </div >
 
       {/* Project Detail Modal */}
-      <ProjectDetailModal
+      < ProjectDetailModal
         project={selectedProject}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-    </section>
+    </section >
   );
 };
 

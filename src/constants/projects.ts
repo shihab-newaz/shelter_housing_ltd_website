@@ -8,15 +8,16 @@ export const projects: Project[] = [
   {
     id: "ongoing-1",
     title: "Shelter Allahdad",
-    location: "Plot 289, Road 7/B, Block E, Bashundhara R/A",
+    location: "Jolshiri",
     status: ProjectStatus.ONGOING,
     image: ongoing.shelterAllahdadJolshiri.allahdad3,
     landArea: "12 Katha",
     buildingHeight: "G + 9",
     details: {
-      elevator: ElevatorType.TWO,
+      elevator: ElevatorType.KOREAN,
       parking: ParkingAvailability.AVAILABLE,
       floors: "G + 9",
+      fullAddress: "Plot 14, Road 407, Sector 16, Jolshiri Abashon",
     },
     flatSizes: ["TBD"],
     completionDate: "2025",
@@ -25,7 +26,7 @@ export const projects: Project[] = [
   {
     id: "ongoing-2",
     title: "Shelter Valencia",
-    location: "Plot 289, Road 7/B, Block E, Bashundhara R/A",
+    location: "Bashundhara",
     status: ProjectStatus.ONGOING,
     image: ongoing.shelterValenciaBashundhara.shelterValenciaNight,
     landArea: "10 Katha",
@@ -35,6 +36,7 @@ export const projects: Project[] = [
       elevator: ElevatorType.TWO,
       parking: ParkingAvailability.AVAILABLE,
       floors: "G + 9",
+      fullAddress: "Plot 289, Road 7/B, Block E, Bashundhara R/A",
     },
     completionDate: "2024",
     brochureUrl: "#",
@@ -43,28 +45,34 @@ export const projects: Project[] = [
   {
     id: "upcoming-1",
     title: "Shelter Kazi Mansion",
-    location: "Road 10, Block L, Bashundhara R/A",
+    location: "Bashundhara",
     status: ProjectStatus.UPCOMING,
     image: logoMain,
     landArea: "TBD",
     buildingHeight: "TBD",
     flatSizes: ["TBD"],
+    details: {
+      fullAddress: "Road 10, Block L, Bashundhara R/A",
+    },
   },
   {
     id: "upcoming-2",
     title: "Shelter Safara",
-    location: "",
+    location: "TBD",
     status: ProjectStatus.UPCOMING,
     image: logoMain,
     landArea: "TBD",
     buildingHeight: "TBD",
     flatSizes: ["TBD"],
+    details: {
+      fullAddress: "TBD",
+    },
   },
   // Completed Projects
   {
     id: "completed-1",
     title: "Shelter NN Pinnacle",
-    location: "Plot 31, Road 1, Sector 2, Aftabnagar",
+    location: "Aftabnagar",
     status: ProjectStatus.COMPLETED,
     image: ongoing.shelterNnPinnacleAftabnagar._01NnPinnacle8d,
     landArea: "8 Katha",
@@ -76,12 +84,13 @@ export const projects: Project[] = [
       elevator: ElevatorType.AVAILABLE,
       parking: ParkingAvailability.AVAILABLE,
       floors: "G + 6",
+      fullAddress: "Plot 31, Road 1, Sector 2, Aftabnagar",
     },
   },
   {
     id: "completed-2",
     title: "Shelter Amin Garden",
-    location: "Bashundhara R/A, Block D",
+    location: "Bashundhara",
     status: ProjectStatus.COMPLETED,
     image: completed.shelterAminGarden,
     landArea: "5 Katha",
@@ -91,6 +100,7 @@ export const projects: Project[] = [
       elevator: ElevatorType.AVAILABLE,
       parking: ParkingAvailability.AVAILABLE,
       floors: "G + 7",
+      fullAddress: "Bashundhara R/A, Block D",
     },
   },
   {
@@ -102,16 +112,22 @@ export const projects: Project[] = [
     landArea: "5 Katha",
     buildingHeight: "G+8 (9 Storied)",
     flatSizes: ["Type-A 1250 sft", "Type-B 1250 sft"],
+    details: {
+      fullAddress: "North Basabo",
+    },
   },
   {
     id: "completed-4",
-    title: "Shelter Darasat Farida Mansion",
+    title: "Darasat Farida Mansion",
     location: "Malibag",
     status: ProjectStatus.COMPLETED,
     image: completed.shelterDarasatFaridaMansion,
     landArea: "5 Katha",
     buildingHeight: "G+7 (8 Storied)",
     flatSizes: ["Type-A 1400 sft", "Type-B 1400 sft"],
+    details: {
+      fullAddress: "Malibag",
+    },
   },
   {
     id: "completed-5",
@@ -122,26 +138,35 @@ export const projects: Project[] = [
     landArea: "10 Katha",
     buildingHeight: "G+9 (10 Storied)",
     flatSizes: ["Type-A 1240 sft", "Type-B 1240 sft", "Type-C 1250 sft", "Type-D 1250 sft"],
+    details: {
+      fullAddress: "Bakhshibazar",
+    },
   },
   {
     id: "completed-6",
     title: "Shelter Honey Garden",
-    location: "Bashundhara R/A",
+    location: "Bashundhara",
     status: ProjectStatus.COMPLETED,
     image: completed.shelterHoneyGarden,
     landArea: "5 Katha",
     buildingHeight: "G+6 (7 Storied)",
     flatSizes: ["Type-A 1325 sft", "Type-B 1325 sft"],
+    details: {
+      fullAddress: "Bashundhara R/A",
+    },
   },
   {
     id: "completed-7",
     title: "Shelter Jamal Tower",
-    location: "Bashundhara R/A",
+    location: "Bashundhara",
     status: ProjectStatus.COMPLETED,
     image: completed.shelterJamalTower,
     landArea: "5 Katha",
     buildingHeight: "G+6 (7 Storied)",
     flatSizes: ["Type-A 1350 sft", "Type-B 2700 sft"],
+    details: {
+      fullAddress: "Bashundhara R/A",
+    },
   },
   {
     id: "completed-8",
@@ -157,6 +182,9 @@ export const projects: Project[] = [
       "Type-C 1295 sft",
       "Type-D 1340 sft",
     ],
+    details: {
+      fullAddress: "Bakhshibazar",
+    },
   },
   {
     id: "completed-9",
@@ -167,6 +195,9 @@ export const projects: Project[] = [
     landArea: "2.5 Katha",
     buildingHeight: "G+7 (8 Storied)",
     flatSizes: ["Type-A 1620 sft"],
+    details: {
+      fullAddress: "Nikunja 2",
+    },
   },
   {
     id: "completed-10",
@@ -177,6 +208,9 @@ export const projects: Project[] = [
     landArea: "4 Katha",
     buildingHeight: "G+6 (7 Storied)",
     flatSizes: ["Type-A 1000 sft", "Type-B 1000 sft"],
+    details: {
+      fullAddress: "Mirpur 1",
+    },
   },
   {
     id: "completed-11",
@@ -192,6 +226,9 @@ export const projects: Project[] = [
       "Type-C 1150 sft",
       "Type-D 1150 sft",
     ],
+    details: {
+      fullAddress: "Azimpur",
+    },
   },
   {
     id: "completed-12",
@@ -202,6 +239,9 @@ export const projects: Project[] = [
     landArea: "5 Katha",
     buildingHeight: "G+7 (8 Storied)",
     flatSizes: ["Type-(A&B) 1325 sft"],
+    details: {
+      fullAddress: "Banasree",
+    },
   },
   {
     id: "completed-13",
@@ -212,6 +252,9 @@ export const projects: Project[] = [
     landArea: "5 Katha",
     buildingHeight: "G+8 (9 Storied)",
     flatSizes: ["Type-A 1325 sft", "Type-B 1310 sft"],
+    details: {
+      fullAddress: "Naya Palton",
+    },
   },
   {
     id: "completed-14",
@@ -222,6 +265,9 @@ export const projects: Project[] = [
     landArea: "2.5 Kathat",
     buildingHeight: "G+7 (8 Storied)",
     flatSizes: ["A 2750 sft"],
+    details: {
+      fullAddress: "Nikunjo 2",
+    },
   },
   {
     id: "completed-15",
@@ -232,6 +278,9 @@ export const projects: Project[] = [
     landArea: "5 Katha",
     buildingHeight: "G+8 (9 Storied)",
     flatSizes: ["Type-A 1205 sft", "Type-A 1165 sft"],
+    details: {
+      fullAddress: "North Basabo",
+    },
   },
   {
     id: "completed-16",
@@ -242,6 +291,9 @@ export const projects: Project[] = [
     landArea: "7 Katha",
     buildingHeight: "G+8 (9 Storied)",
     flatSizes: ["Type-A 1200 sft", "Type-B 1100 sft", "Type-C 1160 sft"],
+    details: {
+      fullAddress: "North Basabo",
+    },
   },
   {
     id: "completed-17",
@@ -252,6 +304,9 @@ export const projects: Project[] = [
     landArea: "5 Katha",
     buildingHeight: "G+7 (8 Storied)",
     flatSizes: ["Type-(A&B) 1490 sft"],
+    details: {
+      fullAddress: "Banasree",
+    },
   },
   {
     id: "completed-18",
@@ -262,6 +317,9 @@ export const projects: Project[] = [
     landArea: "5 Katha",
     buildingHeight: "G+7 (8 Storied)",
     flatSizes: ["Type-A 1220 sft", "Type-B 1150 sft"],
+    details: {
+      fullAddress: "Mohammadpur",
+    },
   },
 
 ];

@@ -1,8 +1,21 @@
-import { X, Download } from "lucide-react";
+import {
+  X,
+  Download,
+  MapPin,
+  Ruler,
+  Building,
+  Home,
+  Calendar,
+  Car,
+  ArrowUpDown,
+  Layers,
+  CheckCircle
+} from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Project } from "@/types/project";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface ProjectDetailModalProps {
   project: Project | null;
@@ -10,135 +23,123 @@ interface ProjectDetailModalProps {
   onClose: () => void;
 }
 
+const DetailItem = ({
+  icon: Icon,
+  label,
+  value,
+  className
+}: {
+  icon: any;
+  label: string;
+  value?: string | number;
+  className?: string;
+}) => {
+  if (!value) return null;
+  return (
+    <div className={cn("flex items-start gap-3 p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors", className)}>
+      <div className="p-2 rounded-full bg-white shadow-sm text-gold">
+        <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+      </div>
+      <div>
+        <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide">{label}</p>
+        <p className="text-sm sm:text-base font-semibold text-primary mt-0.5">{value}</p>
+      </div>
+    </div>
+  );
+};
+
 const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProps) => {
   if (!project) return null;
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="w-[95vw] sm:w-auto sm:max-w-4xl max-h-[85vh] sm:max-h-[90vh] overflow-y-auto bg-background p-4 sm:p-6">
-        <DialogHeader>
-          <DialogTitle className="text-xl sm:text-2xl lg:text-3xl font-bold text-primary pr-8">
-            {project.title}
-          </DialogTitle>
-        </DialogHeader>
+      <DialogContent className="w-[95vw] sm:w-auto sm:max-w-4xl max-h-[90vh] overflow-y-auto bg-background p-0 gap-0 border-none shadow-2xl">
 
-        <div className="space-y-4 sm:space-y-6">
-          {/* Project Image */}
-          <div className="relative overflow-hidden rounded-lg sm:rounded-xl shadow-elegant">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full max-h-[50vh] sm:max-h-[60vh] object-cover object-top"
-            />
-            <div className="absolute top-2 right-2 sm:top-4 sm:right-4">
-              <Badge className="bg-sage text-white text-xs sm:text-sm capitalize">{project.status}</Badge>
+        {/* Header Image Section */}
+        <div className="relative h-[50vh] sm:h-[50vh] md:h-[55vh] lg:h-[55vh] w-full overflow-hidden bg-muted/30">
+          <img
+            src={project.image}
+            alt={project.title}
+            className="w-full h-full object-contain"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+
+
+          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+            <Badge className="mb-3 bg-gold text-primary hover:bg-gold/90 border-none px-3 py-1 text-xs font-bold uppercase tracking-wider">
+              {project.status}
+            </Badge>
+            <DialogTitle className="text-2xl sm:text-3xl md:text-4xl font-bold text-white shadow-sm">
+              {project.title}
+            </DialogTitle>
+          </div>
+        </div>
+
+        <div className="p-6 sm:p-8 space-y-8">
+          {/* Location */}
+          <div className="flex items-start gap-4 p-4 rounded-xl bg-sage/5 border border-sage/10">
+            <div className="p-2.5 bg-sage/10 rounded-full text-sage shrink-0">
+              <MapPin className="h-6 w-6" />
+            </div>
+            <div>
+              <h3 className="font-bold text-primary text-lg mb-1">Project Location</h3>
+              <p className="text-muted-foreground text-base leading-relaxed">{project.details?.fullAddress || project.location}</p>
             </div>
           </div>
 
           {/* Project Details Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
-            <div>
-              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Location</h3>
-              <p className="text-muted-foreground text-sm sm:text-base">{project.location}</p>
-            </div>
-
-            {project.landArea && (
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Land Area</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.landArea}</p>
-              </div>
-            )}
-
-            {project.buildingHeight && (
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Building Height</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.buildingHeight}</p>
-              </div>
-            )}
-
-            {project.units && (
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Total Units</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.units} Units</p>
-              </div>
-            )}
-
-            {project.details?.elevator && (
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Elevator</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.details.elevator}</p>
-              </div>
-            )}
-
-            {project.details?.parking && (
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Parking</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.details.parking}</p>
-              </div>
-            )}
-
-            {project.completionDate && (
-              <div>
-                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Completion Date</h3>
-                <p className="text-muted-foreground text-sm sm:text-base">{project.completionDate}</p>
-              </div>
-            )}
-
-            <div>
-              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Status</h3>
-              <p className="text-muted-foreground capitalize text-sm sm:text-base">{project.status}</p>
+          <div>
+            <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
+              <Building className="h-5 w-5 text-gold" />
+              Project Specifications
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <DetailItem icon={Ruler} label="Land Area" value={project.landArea} />
+              <DetailItem icon={Layers} label="No. of Floors" value={project.details?.floors || project.buildingHeight} />
+              <DetailItem icon={Home} label="Total Units" value={project.units ? `${project.units} Units` : undefined} />
+              <DetailItem icon={ArrowUpDown} label="Elevator" value={project.details?.elevator} />
+              <DetailItem icon={Car} label="Parking" value={project.details?.parking} />
+              <DetailItem icon={Calendar} label="Completion" value={project.completionDate} />
             </div>
           </div>
 
           {/* Flat Sizes */}
           {project.flatSizes && project.flatSizes.length > 0 && (
             <div>
-              <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-2 sm:mb-3">Flat Sizes</h3>
-              <div className="flex flex-wrap gap-2">
+              <h3 className="text-xl font-bold text-primary mb-4 flex items-center gap-2">
+                <Home className="h-5 w-5 text-gold" />
+                Available Flat Sizes
+              </h3>
+              <div className="flex flex-wrap gap-3">
                 {project.flatSizes.map((size, index) => (
-                  <span key={index} className="px-3 py-1.5 bg-sage/10 text-primary rounded-full text-sm">
+                  <Badge
+                    key={index}
+                    variant="secondary"
+                    className="px-4 py-2 text-sm sm:text-base bg-white border border-border shadow-sm text-primary hover:bg-gold/10 hover:border-gold/50 transition-colors"
+                  >
                     {size}
-                  </span>
+                  </Badge>
                 ))}
               </div>
             </div>
           )}
 
-          {/* Brochure Download */}
+          {/* Brochure Download Action */}
           {project.brochureUrl && (
-            <div>
+            <div className="pt-4 border-t border-border">
               <Button
-                variant="outline"
-                className="gap-2 text-primary border-primary/20 hover:bg-primary/5 w-full sm:w-auto active:scale-95 touch-feedback"
+                className="w-full sm:w-auto min-w-[200px] bg-gold hover:bg-gold/90 text-primary font-bold text-lg h-14 shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all rounded-xl gap-3"
                 onClick={() => project.brochureUrl !== "#" && window.open(project.brochureUrl, '_blank')}
               >
-                <Download className="h-4 w-4" />
+                <Download className="h-5 w-5" />
                 Download Brochure
               </Button>
+              <p className="text-center sm:text-left text-sm text-muted-foreground mt-3 ml-1">
+                Get detailed floor plans and pricing information.
+              </p>
             </div>
           )}
-
-          {/* Features */}
-          <div>
-            <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-2 sm:mb-3">Key Features</h3>
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-              {[
-                "Premium finishing throughout",
-                "Smart home automation",
-                "24/7 security & concierge",
-                "Rooftop amenities & lounge",
-                "Underground parking",
-                "Fitness center & pool",
-                "Green spaces & landscaping",
-                "Energy-efficient design"
-              ].map((feature, index) => (
-                <li key={index} className="flex items-center gap-2 text-muted-foreground text-sm sm:text-base">
-                  <div className="h-1.5 w-1.5 rounded-full bg-gold flex-shrink-0" />
-                  {feature}
-                </li>
-              ))}
-            </ul>
-          </div>
         </div>
       </DialogContent>
     </Dialog>

@@ -11,6 +11,7 @@ export enum ElevatorType {
   TWO = "2 Nos",
   THREE = "3 Nos",
   FOUR = "4 Nos",
+  KOREAN = "Korean Lift"
 }
 
 export enum ParkingAvailability {
@@ -23,6 +24,7 @@ export interface ProjectDetails {
   elevator?: ElevatorType;
   parking?: ParkingAvailability;
   floors?: string;
+  fullAddress?: string;
 }
 
 export interface Project {
