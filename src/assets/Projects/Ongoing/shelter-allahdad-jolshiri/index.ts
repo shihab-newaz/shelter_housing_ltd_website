@@ -2,7 +2,7 @@ export { default as allahdad1 } from './allahdad-1.jpeg';
 export { default as allahdad1jpg } from './allahdad-1.jpg';
 export { default as allahdad2 } from './allahdad-2.jpeg';
 export { default as allahdad2jpg } from './allahdad-2.jpg';
-export { default as allahdad3 } from './allahdad-3.jpg';
+export { default as allahdad3 } from './allahdad-3.webp';
 export { default as allahdad4 } from './allahdad-4.jpg';
 export { default as allahdad5 } from './allahdad-5.jpg';
 export { default as allahdad6 } from './allahdad-6.jpg';

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { contactInfo } from "@/constants/contacts";
-import { sendContactEmail, isValidEmail, isValidPhone } from "@/lib/emailService";
+import { sendContactEmail, isValidEmail, isValidPhone, initEmailJS } from "@/lib/emailService";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 
@@ -24,6 +24,8 @@ const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
+    initEmailJS();
+
     if (sectionRef.current && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       gsap.fromTo(
         formRef.current?.querySelectorAll("input, textarea, button") || [],
@@ -72,7 +74,7 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       toast({
         title: "Validation Error",
@@ -168,9 +170,8 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className={`border-sage/30 focus:border-sage focus:ring-sage ${
-                      errors.name ? "border-red-500 focus:border-red-500" : ""
-                    }`}
+                    className={`border-sage/30 focus:border-sage focus:ring-sage ${errors.name ? "border-red-500 focus:border-red-500" : ""
+                      }`}
                   />
                   {errors.name && (
                     <p className="text-sm text-red-500">{errors.name}</p>
@@ -189,9 +190,8 @@ const Contact = () => {
                     onChange={handleChange}
                     required
                     disabled={isSubmitting}
-                    className={`border-sage/30 focus:border-sage focus:ring-sage ${
-                      errors.email ? "border-red-500 focus:border-red-500" : ""
-                    }`}
+                    className={`border-sage/30 focus:border-sage focus:ring-sage ${errors.email ? "border-red-500 focus:border-red-500" : ""
+                      }`}
                   />
                   {errors.email && (
                     <p className="text-sm text-red-500">{errors.email}</p>
@@ -210,9 +210,8 @@ const Contact = () => {
                   value={formData.phone}
                   onChange={handleChange}
                   disabled={isSubmitting}
-                  className={`border-sage/30 focus:border-sage focus:ring-sage ${
-                    errors.phone ? "border-red-500 focus:border-red-500" : ""
-                  }`}
+                  className={`border-sage/30 focus:border-sage focus:ring-sage ${errors.phone ? "border-red-500 focus:border-red-500" : ""
+                    }`}
                 />
                 {errors.phone && (
                   <p className="text-sm text-red-500">{errors.phone}</p>
@@ -231,9 +230,8 @@ const Contact = () => {
                   required
                   rows={6}
                   disabled={isSubmitting}
-                  className={`border-sage/30 focus:border-sage focus:ring-sage resize-none ${
-                    errors.message ? "border-red-500 focus:border-red-500" : ""
-                  }`}
+                  className={`border-sage/30 focus:border-sage focus:ring-sage resize-none ${errors.message ? "border-red-500 focus:border-red-500" : ""
+                    }`}
                 />
                 {errors.message && (
                   <p className="text-sm text-red-500">{errors.message}</p>
