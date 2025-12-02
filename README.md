@@ -1,96 +1,106 @@
-# Welcome to your Lovable project
+# Shelter Housing Ltd. Website
 
-## Project info
+A premium real estate development company website showcasing luxury residential and commercial projects.
 
-**URL**: https://lovable.dev/projects/8eeb115b-36a8-4196-b507-e73378035c5b
+## Overview
 
-## How can I edit this code?
+This is the official website for Shelter Housing Ltd., featuring:
+- **Hero Section** with dynamic animations
+- **Featured Projects** carousel showcasing ongoing, completed, and upcoming developments
+- **About Section** highlighting company values and expertise
+- **Why Choose Us** section with key differentiators
+- **Testimonials** from satisfied clients
+- **Contact Form** with EmailJS integration
+- **Responsive Design** optimized for all devices
 
-There are several ways of editing your application.
+## Tech Stack
 
-**Use Lovable**
+- **React 18** with TypeScript
+- **Vite** for fast development and optimized builds
+- **Tailwind CSS** for styling
+- **shadcn/ui** component library
+- **GSAP** for smooth animations
+- **Lucide React** for icons
+- **EmailJS** for contact form functionality
+- **React Router** for navigation
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/8eeb115b-36a8-4196-b507-e73378035c5b) and start prompting.
+## Getting Started
 
-Changes made via Lovable will be committed automatically to this repo.
+### Prerequisites
 
-**Use your preferred IDE**
+- Node.js (v18 or higher)
+- npm or yarn
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Installation
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+```bash
+# Clone the repository
+git clone <repository-url>
 
-Follow these steps:
+# Navigate to project directory
+cd shelter_housing_ltd_website
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+# Install dependencies
+npm install
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Start development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:5173`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Available Scripts
 
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- GSAP (animations)
-- EmailJS (contact form)
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run build:dev` - Build in development mode
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
 ## Contact Form Setup
 
-The contact form uses EmailJS for sending emails. To enable email functionality:
+The contact form uses EmailJS. To configure:
 
-1. Sign up at [emailjs.com](https://www.emailjs.com/)
-2. Add an email service (Gmail, Outlook, etc.)
-3. Create an email template using the HTML structure provided in `.env.example`
-4. Copy `.env.example` to `.env` and fill in your EmailJS credentials:
-   ```
+1. Create an account at [emailjs.com](https://www.emailjs.com/)
+2. Set up an email service (Gmail, Outlook, etc.)
+3. Create an email template with these variables:
+   - `{{name}}` - Sender's name
+   - `{{email}}` - Sender's email
+   - `{{phone}}` - Sender's phone
+   - `{{message}}` - Message content
+   - `{{time}}` - Timestamp
+
+4. Copy `.env.example` to `.env` and add your credentials:
+   ```env
    VITE_EMAILJS_SERVICE_ID=your_service_id
    VITE_EMAILJS_TEMPLATE_ID=your_template_id
    VITE_EMAILJS_PUBLIC_KEY=your_public_key
    ```
 
-The template variables are:
-- `{{name}}` - Sender's name
-- `{{email}}` - Sender's email
-- `{{phone}}` - Sender's phone (optional)
-- `{{message}}` - The message content
-- `{{time}}` - Timestamp when message was sent
+## Project Structure
 
-## How can I deploy this project?
+```
+src/
+├── assets/          # Images and static assets
+├── components/      # React components
+├── constants/       # Project data and configuration
+├── hooks/           # Custom React hooks
+├── lib/             # Utility libraries
+├── pages/           # Page components
+├── types/           # TypeScript type definitions
+└── utils/           # Helper functions
+```
 
-Simply open [Lovable](https://lovable.dev/projects/8eeb115b-36a8-4196-b507-e73378035c5b) and click on Share -> Publish.
+## Deployment
 
-## Can I connect a custom domain to my Lovable project?
+Build the production bundle:
 
-Yes, you can!
+```bash
+npm run build
+```
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+The optimized files will be in the `dist/` directory, ready for deployment to any static hosting service.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## License
+
+© 2025 Shelter Housing Ltd. All rights reserved.
