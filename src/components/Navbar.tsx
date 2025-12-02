@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { logo } from "@/assets/Logo";
 import { navLinks } from "@/constants/navbar";
+import { PHONE_NUMBER_MAIN, PHONE_NUMBER_HOTLINE } from "@/constants/contacts";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -67,7 +68,7 @@ const Navbar = () => {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-sage group-hover:w-full hover-spring" />
               </a>
             ))}
-            <a href="tel:+8801755605072">
+            <a href={`tel:${PHONE_NUMBER_MAIN}`}>
               <Button
                 variant="default"
                 className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-105 lg:hover:scale-110 hover:shadow-lg active:scale-95 touch-feedback"
@@ -102,7 +103,7 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a href="tel:+09617335588" className="block pt-2">
+            <a href={`tel:${PHONE_NUMBER_HOTLINE}`} className="block pt-2">
               <Button
                 variant="default"
                 className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-105 hover:shadow-lg w-full sm:w-auto active:scale-95 touch-feedback"

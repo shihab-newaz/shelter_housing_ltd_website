@@ -1,16 +1,22 @@
 import { Project } from "@/types/project";
 import { completed, ongoing } from "@/assets/Projects";
+import { logoMain } from "@/assets/Logo";
 
 export const projects: Project[] = [
   // Ongoing Projects
   {
     id: "ongoing-1",
     title: "Shelter Allahdad",
-    location: "Jolshiri",
+    location: "Plot 289, Road 7/B, Block E, Bashundhara R/A",
     status: "ongoing",
-    image: ongoing.shelterAllahdadJolshiri.allahdad1,
+    image: ongoing.shelterAllahdadJolshiri.allahdad3,
     landArea: "TBD",
-    buildingHeight: "TBD",
+    buildingHeight: "G + 9",
+    details: {
+      elevator: "2 Nos",
+      parking: "Available",
+      floors: "G + 9",
+    },
     flatSizes: ["TBD"],
     completionDate: "2025",
     brochureUrl: "#",
@@ -18,28 +24,57 @@ export const projects: Project[] = [
   {
     id: "ongoing-2",
     title: "Shelter NN Pinnacle",
-    location: "AftabNagar",
-    status: "ongoing",
+    location: "Plot 31, Road 1, Sector 2, Aftabnagar",
+    status: "completed",
     image: ongoing.shelterNnPinnacleAftabnagar._01NnPinnacle8d,
     landArea: "TBD",
     buildingHeight: "TBD",
     flatSizes: ["TBD"],
     completionDate: "2025",
     brochureUrl: "#",
+    details: {
+      elevator: "Available",
+      parking: "Available",
+    },
   },
   {
     id: "ongoing-3",
     title: "Shelter Valencia",
-    location: "Bashundhara",
+    location: "Plot 289, Road 7/B, Block E, Bashundhara R/A",
     status: "ongoing",
     image: ongoing.shelterValenciaBashundhara.shelterValenciaRevised,
     landArea: "TBD",
     buildingHeight: "TBD",
     flatSizes: ["TBD"],
+    details: {
+      elevator: "2 Nos",
+      parking: "Available",
+      floors: "G + 9",
+    },
     completionDate: "2024",
     brochureUrl: "#",
   },
-
+  // Upcoming Projects
+  {
+    id: "upcoming-1",
+    title: "Shelter Kazi Mansion",
+    location: "Road 10, Block L, Bashundhara R/A",
+    status: "upcoming",
+    image: logoMain,
+    landArea: "TBD",
+    buildingHeight: "TBD",
+    flatSizes: ["TBD"],
+  },
+  {
+    id: "upcoming-2",
+    title: "Shelter Safara",
+    location: "",
+    status: "upcoming",
+    image: logoMain,
+    landArea: "TBD",
+    buildingHeight: "TBD",
+    flatSizes: ["TBD"],
+  },
   // Completed Projects
   {
     id: "completed-1",

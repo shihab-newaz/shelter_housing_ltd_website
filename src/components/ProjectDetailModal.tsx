@@ -41,7 +41,7 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
               <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Location</h3>
               <p className="text-muted-foreground text-sm sm:text-base">{project.location}</p>
             </div>
-            
+
             {project.landArea && (
               <div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Land Area</h3>
@@ -60,6 +60,20 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
               <div>
                 <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Total Units</h3>
                 <p className="text-muted-foreground text-sm sm:text-base">{project.units} Units</p>
+              </div>
+            )}
+
+            {project.details?.elevator && (
+              <div>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Elevator</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">{project.details.elevator}</p>
+              </div>
+            )}
+
+            {project.details?.parking && (
+              <div>
+                <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-primary mb-1 sm:mb-2">Parking</h3>
+                <p className="text-muted-foreground text-sm sm:text-base">{project.details.parking}</p>
               </div>
             )}
 
@@ -93,8 +107,8 @@ const ProjectDetailModal = ({ project, isOpen, onClose }: ProjectDetailModalProp
           {/* Brochure Download */}
           {project.brochureUrl && (
             <div>
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 className="gap-2 text-primary border-primary/20 hover:bg-primary/5 w-full sm:w-auto active:scale-95 touch-feedback"
                 onClick={() => project.brochureUrl !== "#" && window.open(project.brochureUrl, '_blank')}
               >

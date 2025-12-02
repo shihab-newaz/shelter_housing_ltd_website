@@ -38,3 +38,6 @@ export const contactInfo: ContactInfo[] = [
     details: ["Sat-Thu: 10:00 AM - 5:00 PM"],
   },
 ];
+
+export const PHONE_NUMBER_MAIN = "01755605072";
+export const PHONE_NUMBER_HOTLINE = "09617335588";

@@ -65,7 +65,7 @@ const About = () => {
         <div className="text-center mb-8 sm:mb-10 lg:mb-12 xl:mb-16">
           <div className="h-1 w-12 sm:w-16 bg-gold mx-auto mb-4 sm:mb-6" />
           <h2 className="text-primary mb-2 sm:mb-4">
-            About Us
+            Our Head Office
           </h2>
           <p className="text-muted-foreground text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
             Discover our journey, expertise, and commitment to excellence in luxury real estate

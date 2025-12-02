@@ -12,4 +12,9 @@ export interface Project {
   units?: number;
   completionDate?: string;
   brochureUrl?: string;
+  details?: {
+    elevator?: string;
+    parking?: string;
+    floors?: string;
+  };
 }
