@@ -25,7 +25,7 @@ export const contactInfo: ContactInfo[] = [
   {
     icon: Phone,
     title: "Call Us",
-    details: ["01755605072", "01755605073", " 01755605075", "01755605080"],
+    details: ["+8801755605080", "+8801755605073", "+8801755605075", "+8801755605072"],
   },
   {
     icon: Mail,
@@ -39,5 +39,5 @@ export const contactInfo: ContactInfo[] = [
   },
 ];
 
-export const PHONE_NUMBER_MAIN = "01755605072";
-export const PHONE_NUMBER_HOTLINE = "09617335588";
+export const PHONE_NUMBER_MAIN = "+8801755605080";
+export const PHONE_NUMBER_HOTLINE = "+8809617335588";

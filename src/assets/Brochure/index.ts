@@ -1,0 +1,1 @@
+export {default as AllahdadBrochure} from './Shelter Allahdad(Jolshiri Abashon).pdf';
