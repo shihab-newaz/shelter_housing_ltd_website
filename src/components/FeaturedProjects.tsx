@@ -123,12 +123,12 @@ const FeaturedProjects = () => {
               ref={carouselContentRef}
               className={cn(
                 "-ml-2 md:-ml-4",
-                shouldCenterAlign && "justify-center"
+                shouldCenterAlign && "md:justify-center"
               )}
             >  {filteredProjects.map((project) => (
               <CarouselItem
                 key={project.id}
-                className="pl-2 md:pl-4 basis-full sm:basis-1/2 lg:basis-1/3 xl:basis-1/4"
+                className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
               >
                 <div
                   data-project-card
