@@ -9,6 +9,7 @@ const WhyChooseUs = lazy(() => import("@/components/WhyChooseUs"));
 const Testimonials = lazy(() => import("@/components/Testimonials"));
 const Contact = lazy(() => import("@/components/Contact"));
 const Footer = lazy(() => import("@/components/Footer"));
+const FloatingContactWidget = lazy(() => import("@/components/FloatingContactWidget"));
 
 const Index = () => {
   return (
@@ -22,6 +23,7 @@ const Index = () => {
         <Testimonials />
         <Contact />
         <Footer />
+        <FloatingContactWidget />
       </Suspense>
     </div>
   );

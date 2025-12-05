@@ -58,7 +58,6 @@ export const projects: Project[] = [
         buildingHeight: "G + 9",
         flatSizes: ["Type-A 1700 sft", "Type-B 2300 sft"],
         completionDate: "2025",
-        brochureUrl: "#",
         details: {
             elevator: ElevatorType.TWO,
             parking: ParkingAvailability.AVAILABLE,
@@ -76,7 +75,6 @@ export const projects: Project[] = [
         buildingHeight: "G + 6",
         flatSizes: ["Type-A 1385 sft", "Type-B 2770 sft"],
         completionDate: "2024",
-        brochureUrl: "#",
         details: {
             elevator: ElevatorType.AVAILABLE,
             parking: ParkingAvailability.AVAILABLE,

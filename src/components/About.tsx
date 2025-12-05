@@ -133,7 +133,7 @@ const About = () => {
               {CRAFTING_TEXT}
             </h2>
             <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
-              Shelter Housing Bangladesh has been a pioneer in premium real estate development within Dhaka for nearly three decades. 
+              Shelter Housing Limited has been a pioneer in premium real estate development within Dhaka for nearly three decades. 
               Our dedication to architectural innovation, sustainable building practices, and community-focused development has established us as a 
               leading name in luxury residential projects within the city.
             </p>

@@ -70,7 +70,7 @@ const Footer = () => {
         <div className="border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-white/60 text-sm">
-              © {currentYear} Shelter Housing Bangladesh. All rights reserved.
+              © {currentYear} Shelter Housing Limited. All rights reserved.
             </p>
             <p className="text-white/60 text-sm">
               Designed with excellence for luxury living.
