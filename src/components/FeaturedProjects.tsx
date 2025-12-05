@@ -1,107 +1,154 @@
-import { useState, useEffect, useRef } from "react";
-import { MapPin } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
+import { useState } from "react";
+import { Carousel, Card } from "@/components/ui/apple-cards-carousel";
 import { projects } from "@/constants/projects";
 import { projectFilters } from "@/constants/projectFilters";
 import { ProjectStatus, Project } from "@/types/project";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useIsMobile } from "@/hooks/use-mobile";
-import ProjectDetailModal from "./ProjectDetailModal";
-import gsap from "gsap";
-
-gsap.registerPlugin(ScrollTrigger);
+import { cn } from "@/lib/utils";
+import {
+  MapPin,
+  Ruler,
+  Building,
+  Home,
+  Calendar,
+  Car,
+  ArrowUpDown,
+  Layers,
+  Download,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const FeaturedProjects = () => {
   const [activeFilter, setActiveFilter] = useState<ProjectStatus>(ProjectStatus.ONGOING);
-  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const carouselContentRef = useRef<HTMLDivElement>(null);
-  const isMobile = useIsMobile();
 
   const filteredProjects = projects.filter(
     (project) => project.status === activeFilter
   );
 
-  // Determine alignment based on number of projects
-  const shouldCenterAlign = filteredProjects.length < 5;
-
-  useEffect(() => {
-    // Skip animations on mobile for better performance
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (isMobile || prefersReducedMotion) return;
-
-    // Animate filter change (desktop only)
-    if (carouselContentRef.current) {
-      gsap.fromTo(
-        carouselContentRef.current.querySelectorAll("[data-project-card]"),
-        { opacity: 0, y: 30, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          stagger: 0.1,
-          duration: 0.5,
-          ease: "power3.out",
-        }
-      );
-    }
-  }, [activeFilter, isMobile]);
-
-  useEffect(() => {
-    // Scroll-triggered animation for section entrance
-    if (containerRef.current) {
-      gsap.fromTo(
-        containerRef.current.querySelector("h2"),
-        { opacity: 0, y: 40 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 80%",
-          },
-        }
-      );
-    }
-  }, []);
-
-  const handleViewDetails = (project: Project) => {
-    setSelectedProject(project);
-    setIsModalOpen(true);
+  const DetailItem = ({
+    icon: Icon,
+    label,
+    value,
+    className,
+  }: {
+    icon: any;
+    label: string;
+    value?: string | number;
+    className?: string;
+  }) => {
+    if (!value) return null;
+    return (
+      <div className={cn("flex items-start gap-3 p-3 rounded-lg bg-neutral-100 dark:bg-neutral-800", className)}>
+        <div className="p-2 rounded-full bg-white dark:bg-neutral-700 shadow-sm text-gold">
+          <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
+        </div>
+        <div>
+          <p className="text-xs text-neutral-600 dark:text-neutral-400 font-medium uppercase tracking-wide">{label}</p>
+          <p className="text-sm sm:text-base font-semibold text-neutral-900 dark:text-white mt-0.5">{value}</p>
+        </div>
+      </div>
+    );
   };
 
+  const ProjectContent = ({ project }: { project: Project }) => {
+    return (
+      <div className="bg-neutral-50 dark:bg-neutral-800 p-6 md:p-10 rounded-3xl space-y-6">
+        {/* Location */}
+        <div className="flex items-start gap-4 p-4 rounded-xl bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700">
+          <div className="p-2.5 bg-gold/10 rounded-full text-gold shrink-0">
+            <MapPin className="h-6 w-6" />
+          </div>
+          <div>
+            <h3 className="font-bold text-neutral-900 dark:text-white text-lg mb-1">Project Location</h3>
+            <p className="text-neutral-600 dark:text-neutral-400 text-base leading-relaxed">
+              {project.details?.fullAddress || project.location}
+            </p>
+          </div>
+        </div>
+
+        {/* Project Details Grid */}
+        <div>
+          <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+            <Building className="h-5 w-5 text-gold" />
+            Project Specifications
+          </h3>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <DetailItem icon={Ruler} label="Land Area" value={project.landArea} />
+            <DetailItem icon={Layers} label="No. of Floors" value={project.details?.floors || project.buildingHeight} />
+            <DetailItem icon={Home} label="Total Units" value={project.units ? `${project.units} Units` : undefined} />
+            <DetailItem icon={ArrowUpDown} label="Elevator" value={project.details?.elevator} />
+            <DetailItem icon={Car} label="Parking" value={project.details?.parking} />
+            <DetailItem icon={Calendar} label="Completion" value={project.completionDate} />
+          </div>
+        </div>
+
+        {/* Flat Sizes */}
+        {project.flatSizes && project.flatSizes.length > 0 && (
+          <div>
+            <h3 className="text-xl font-bold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+              <Home className="h-5 w-5 text-gold" />
+              Available Flat Sizes
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {project.flatSizes.map((size, index) => (
+                <Badge
+                  key={index}
+                  className="px-4 py-2 text-sm sm:text-base bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-700 text-neutral-900 dark:text-white hover:bg-gold/10 hover:border-gold/50"
+                >
+                  {size}
+                </Badge>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Brochure Download Action */}
+        {project.brochureUrl && (
+          <div className="pt-4 border-t border-neutral-200 dark:border-neutral-700">
+            <Button
+              className="w-full sm:w-auto min-w-[200px] bg-gold hover:bg-gold/90 text-primary font-bold text-lg h-14 shadow-lg hover:shadow-xl transition-all rounded-xl gap-3"
+              onClick={() => project.brochureUrl !== "#" && window.open(project.brochureUrl, "_blank")}
+            >
+              <Download className="h-5 w-5" />
+              Download Brochure
+            </Button>
+            <p className="text-center sm:text-left text-sm text-neutral-600 dark:text-neutral-400 mt-3 ml-1">
+              Get detailed floor plans and pricing information.
+            </p>
+          </div>
+        )}
+      </div>
+    );
+  };
+
+  const cards = filteredProjects.map((project, index) => ({
+    src: project.image,
+    title: project.title,
+    category: project.location || "Dhaka",
+    content: <ProjectContent project={project} />,
+  }));
+
+  const cardElements = cards.map((card, index) => <Card key={card.src} card={card} index={index} />);
+
   return (
-    <section
-      id="projects"
-      ref={containerRef}
-      className="py-12 sm:py-16 lg:py-20 xl:py-24 bg-geometric bg-muted"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12">
-        {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-10 lg:mb-12 xl:mb-16">
-          <h2 className="text-primary mb-6">Featured Projects</h2>
+    <section id="projects" className="bg-geometric bg-muted">
+      <div className="w-full h-full py-12 sm:py-20">
+        <div className="max-w-7xl mx-auto px-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 mb-6 text-center">
+            Featured Projects
+          </h2>
 
           {/* Filter Tabs */}
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 p-2 bg-white rounded-lg shadow-card">
+          <div className="flex flex-wrap gap-2 mb-8 justify-center">
             {projectFilters.map((filter) => (
               <button
                 key={filter.value}
                 onClick={() => setActiveFilter(filter.value)}
                 className={cn(
-                  "px-4 sm:px-6 py-2.5 sm:py-3 rounded-md font-semibold hover-spring text-xs sm:text-sm md:text-base touch-feedback",
+                  "px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 whitespace-nowrap",
                   activeFilter === filter.value
-                    ? "bg-gold text-primary shadow-md scale-105"
-                    : "text-muted-foreground hover:text-primary hover:bg-sage/20 hover:scale-105 active:scale-95"
+                    ? "bg-primary text-primary-foreground shadow-lg scale-105"
+                    : "bg-background/50 text-muted-foreground hover:bg-background hover:text-foreground hover:scale-105"
                 )}
               >
                 {filter.label}
@@ -110,90 +157,9 @@ const FeaturedProjects = () => {
           </div>
         </div>
 
-        {/* Carousel */}
-        <div className="relative">
-          <Carousel
-            opts={{
-              align: "start",
-              loop: filteredProjects.length > 4,
-            }}
-            className="w-full mx-auto max-w-[calc(100%-6rem)] sm:max-w-[calc(100%-8rem)] lg:max-w-[calc(100%-10rem)]"
-          >
-            <CarouselContent
-              ref={carouselContentRef}
-              className={cn(
-                "-ml-2 md:-ml-4",
-                shouldCenterAlign && "md:justify-center"
-              )}
-            >  {filteredProjects.map((project) => (
-              <CarouselItem
-                key={project.id}
-                className="pl-2 md:pl-4 basis-full md:basis-1/2 lg:basis-1/3 xl:basis-1/4"
-              >
-                <div
-                  data-project-card
-                  className="group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-elegant hover-lift bg-noise cursor-pointer h-full"
-                  onClick={() => handleViewDetails(project)}
-                >
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full aspect-[3/4] sm:aspect-[2/3] object-cover transition-transform duration-700 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-90 transition-opacity duration-300" />
-
-                  <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 text-white flex flex-col">
-                    <div className="h-1 w-16 bg-gold mb-3 rounded-full" />
-
-                    <h3 className="text-lg sm:text-xl font-bold mb-3 leading-tight tracking-tight line-clamp-2">
-                      {project.title}
-                    </h3>
-
-                    <div className="mt-auto grid grid-cols-[1fr,auto] gap-3 items-end border-t border-white/20 pt-4">
-                      <div className="flex flex-col gap-1">
-                        <div className="flex items-center gap-1.5 text-gold">
-                          <MapPin className="h-4 w-4" />
-                          <span className="text-xs font-bold uppercase tracking-wider">Location</span>
-                        </div>
-                        <p className="text-base sm:text-lg font-medium text-white/95 line-clamp-1">
-                          {project.location || "Dhaka"}
-                        </p>
-                      </div>
-
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleViewDetails(project);
-                        }}
-                        className="bg-gold hover:bg-gold/90 text-primary font-bold hover-spring hover:scale-105 shadow-lg active:scale-95 h-10 px-5"
-                      >
-                        Details
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-            </CarouselContent>
-            <CarouselPrevious className="-left-10 sm:-left-14 lg:-left-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-11 w-11 sm:h-12 sm:w-12 active:scale-95 touch-feedback" />
-            <CarouselNext className="-right-10 sm:-right-14 lg:-right-16 border-sage text-sage hover:bg-sage hover:text-white hover-spring h-11 w-11 sm:h-12 sm:w-12 active:scale-95 touch-feedback" />
-          </Carousel>
-        </div>
-
-        {/* Project count indicator */}
-        <div className="text-center mt-6 text-sm text-muted-foreground">
-          {filteredProjects.length} {filteredProjects.length === 1 ? "project" : "projects"} in {activeFilter} category
-        </div>
-      </div >
-
-      {/* Project Detail Modal */}
-      < ProjectDetailModal
-        project={selectedProject}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
-    </section >
+        <Carousel items={cardElements} />
+      </div>
+    </section>
   );
 };
 
