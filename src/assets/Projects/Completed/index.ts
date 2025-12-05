@@ -15,3 +15,6 @@ export { default as shelterSultanaGarden } from './shelter-sultana-garden.webp';
 export { default as shelterSultanaTower } from './shelter-sultana-tower.webp';
 export { default as shelterView } from './shelter-view.webp';
 export { default as shelterYousufVilla } from './shelter-yousuf-villa.webp';
+export { default as shelterValenciaBashundhara } from './shelter-valencia.webp';
+export { default as sheterNNPinnacle } from './shelter-nn-pinnacle.jpg';
+

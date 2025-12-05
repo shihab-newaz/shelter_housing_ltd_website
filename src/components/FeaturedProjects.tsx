@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Eye, Download, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Carousel,
@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 import { projects } from "@/constants/projects";
-import { projectFilters } from "@/constants/featuredProjects";
+import { projectFilters } from "@/constants/projectFilters";
 import { ProjectStatus, Project } from "@/types/project";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useIsMobile } from "@/hooks/use-mobile";
