@@ -1,10 +1,10 @@
-import { Award, Shield, Users, TrendingUp } from "lucide-react";
+import { Clock, Shield, Users, TrendingUp } from "lucide-react";
 
 export const features = [
   {
-    icon: Award,
-    title: "Award-Winning Design",
-    description: "Recognized internationally for architectural excellence and innovative design solutions.",
+    icon: Clock,
+    title: "On Time Delivery",
+    description: "Committed to delivering projects on schedule with meticulous planning and execution.",
   },
   {
     icon: Shield,

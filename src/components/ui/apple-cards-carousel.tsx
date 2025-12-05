@@ -93,7 +93,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
         >
             <div className="relative w-full">
                 <div
-                    className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20"
+                    className="flex w-full overflow-x-scroll overscroll-x-auto scroll-smooth py-10 [scrollbar-width:none] md:py-20 snap-x snap-mandatory"
                     ref={carouselRef}
                     onScroll={checkScrollability}
                 >
@@ -105,8 +105,8 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
 
                     <div
                         className={cn(
-                            "flex flex-row gap-4",
-                            "justify-center pl-0 mx-auto md:justify-start md:pl-4",
+                            "flex flex-row gap-4 md:gap-4",
+                            "justify-start pl-[5vw] md:pl-4",
                         )}
                     >
                         {items.map((item, index) => (
@@ -125,7 +125,7 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                                     },
                                 }}
                                 key={"card" + index}
-                                className="rounded-3xl last:pr-[5%] md:last:pr-[33%]"
+                                className="rounded-3xl snap-center shrink-0 last:pr-[5vw] md:last:pr-[33%]"
                             >
                                 {item}
                             </motion.div>
@@ -134,18 +134,18 @@ export const Carousel = ({ items, initialScroll = 0 }: CarouselProps) => {
                 </div>
                 <div className="mr-10 flex justify-end gap-2">
                     <button
-                        className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+                        className="relative z-40 flex h-12 w-12 md:h-10 md:w-10 items-center justify-center rounded-full bg-neutral-900 dark:bg-white disabled:opacity-30 hover:scale-110 transition-transform shadow-lg"
                         onClick={scrollLeft}
                         disabled={!canScrollLeft}
                     >
-                        <IconArrowNarrowLeft className="h-6 w-6 text-gray-500" />
+                        <IconArrowNarrowLeft className="h-7 w-7 md:h-6 md:w-6 text-white dark:text-neutral-900" />
                     </button>
                     <button
-                        className="relative z-40 flex h-10 w-10 items-center justify-center rounded-full bg-gray-100 disabled:opacity-50"
+                        className="relative z-40 flex h-12 w-12 md:h-10 md:w-10 items-center justify-center rounded-full bg-neutral-900 dark:bg-white disabled:opacity-30 hover:scale-110 transition-transform shadow-lg"
                         onClick={scrollRight}
                         disabled={!canScrollRight}
                     >
-                        <IconArrowNarrowRight className="h-6 w-6 text-gray-500" />
+                        <IconArrowNarrowRight className="h-7 w-7 md:h-6 md:w-6 text-white dark:text-neutral-900" />
                     </button>
                 </div>
             </div>
@@ -241,7 +241,7 @@ export const Card = ({
                 onClick={handleOpen}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
-                className="group relative z-10 flex h-[28rem] w-72 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] md:w-96 dark:bg-neutral-900"
+                className="group relative z-10 flex h-[40rem] w-[90vw] md:w-96 flex-col items-start justify-start overflow-hidden rounded-3xl bg-gray-100 md:h-[40rem] dark:bg-neutral-900"
             >
                 <div className="pointer-events-none absolute inset-x-0 top-0 z-30 h-full bg-gradient-to-b from-black/50 via-transparent to-transparent" />
                 <div className="pointer-events-none absolute inset-0 z-50 hidden items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/40 md:flex">

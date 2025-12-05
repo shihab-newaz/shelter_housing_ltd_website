@@ -107,7 +107,7 @@ const Hero = () => {
       <div ref={videoRef} className="absolute inset-0 w-full h-full">
         {/* Poster/placeholder shown before video loads */}
         {!isVideoLoaded && (
-          <div 
+          <div
             className="absolute inset-0 w-full h-full bg-primary"
             style={{
               backgroundImage: `url(${POSTER_IMAGE})`,
@@ -143,7 +143,7 @@ const Hero = () => {
       />
 
       {/* Hero Content */}
-      <div ref={contentRef} className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full min-h-[100dvh] flex items-center">
+      <div ref={contentRef} className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-12 h-full min-h-[100dvh] flex items-end pb-20 sm:items-center sm:pb-0">
         <div className="max-w-full sm:max-w-4xl lg:max-w-5xl w-full">
           <h1 className="text-white mb-4 sm:mb-6 font-black">
             Creating Homes,<br /> Defining Skylines.
@@ -174,8 +174,8 @@ const Hero = () => {
       </div>
 
       {/* Scroll Indicator */}
-      <a 
-        href="#projects" 
+      <a
+        href="#projects"
         className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-white/70 hover:text-white transition-colors group"
         aria-label="Scroll to projects"
       >

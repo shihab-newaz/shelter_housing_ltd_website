@@ -103,7 +103,7 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a href={`tel:${PHONE_NUMBER_HOTLINE}`} className="block pt-2">
+            <a href={`tel:${PHONE_NUMBER_MAIN}`} className="block pt-2">
               <Button
                 variant="default"
                 className="bg-gold hover:bg-gold/90 text-primary font-semibold hover-spring hover:scale-105 hover:shadow-lg w-full sm:w-auto active:scale-95 touch-feedback"
