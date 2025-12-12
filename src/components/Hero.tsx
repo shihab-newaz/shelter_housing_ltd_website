@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Loader2 } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import gsap from "gsap";
 
@@ -10,11 +10,9 @@ gsap.registerPlugin(ScrollTrigger);
 const VIDEO_DESKTOP = import.meta.env.VITE_CLOUDINARY_VIDEO_DESKTOP;
 const VIDEO_MOBILE = import.meta.env.VITE_CLOUDINARY_VIDEO_MOBILE;
 
-// Fallback poster image (first frame or a static image)
-const POSTER_IMAGE = "https://res.cloudinary.com/dp0phtmmx/video/upload/so_0/v1764452382/Landscape_yshfbt.jpg";
-
 const Hero = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isVideoReady, setIsVideoReady] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
@@ -100,17 +98,14 @@ const Hero = () => {
     <section id="home" ref={heroRef} className="relative w-full min-h-[100dvh] overflow-hidden bg-noise">
       {/* Video Background with Lazy Loading */}
       <div ref={videoRef} className="absolute inset-0 w-full h-full">
-        {/* Poster/placeholder shown before video loads */}
-        {!isVideoLoaded && (
-          <div
-            className="absolute inset-0 w-full h-full bg-primary"
-            style={{
-              backgroundImage: `url(${POSTER_IMAGE})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center',
-            }}
-          />
+        {/* Spinner/placeholder shown before video is ready */}
+        {(!isVideoLoaded || !isVideoReady) && (
+          <div className="absolute inset-0 w-full h-full bg-primary flex items-center justify-center z-10">
+            <Loader2 className="h-10 w-10 animate-spin text-gold" aria-hidden="true" />
+            <span className="sr-only">Loading video</span>
+          </div>
         )}
+
         {/* Native HTML5 Video - loads after initial paint */}
         {isVideoLoaded && (
           <video
@@ -120,7 +115,7 @@ const Hero = () => {
             loop
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            poster={POSTER_IMAGE}
+            onLoadedData={() => setIsVideoReady(true)}
           >
             <source src={VIDEO_MOBILE} type="video/mp4" media="(max-width: 767px)" />
             <source src={VIDEO_DESKTOP} type="video/mp4" />
