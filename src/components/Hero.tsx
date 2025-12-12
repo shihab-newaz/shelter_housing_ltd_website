@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown } from "lucide-react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useIsMobile } from "@/hooks/use-mobile";
 import gsap from "gsap";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,15 +15,11 @@ const POSTER_IMAGE = "https://res.cloudinary.com/dp0phtmmx/video/upload/so_0/v17
 
 const Hero = () => {
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const isMobile = useIsMobile();
   const heroRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  // Get the appropriate video URL based on device
-  const videoUrl = isMobile ? VIDEO_MOBILE : VIDEO_DESKTOP;
 
   // Lazy load video after initial paint
   useEffect(() => {
@@ -117,7 +112,7 @@ const Hero = () => {
           />
         )}
         {/* Native HTML5 Video - loads after initial paint */}
-        {isVideoLoaded && videoUrl && (
+        {isVideoLoaded && (
           <video
             ref={videoElementRef}
             autoPlay
@@ -127,7 +122,8 @@ const Hero = () => {
             className="absolute inset-0 w-full h-full object-cover"
             poster={POSTER_IMAGE}
           >
-            <source src={videoUrl} type="video/mp4" />
+            <source src={VIDEO_MOBILE} type="video/mp4" media="(max-width: 767px)" />
+            <source src={VIDEO_DESKTOP} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         )}

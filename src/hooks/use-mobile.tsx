@@ -10,7 +10,8 @@ export function useIsMobile() {
 
   const [isMobile, setIsMobile] = React.useState<boolean>(() => getIsMobile());
 
-  React.useEffect(() => {
+  // Layout effect prevents a one-frame desktop->mobile flip on initial paint.
+  React.useLayoutEffect(() => {
     const mql = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
     const onChange = () => {
       setIsMobile(mql.matches);
