@@ -1,6 +1,6 @@
 import { Phone } from "lucide-react";
 import { socialLinks } from "@/constants/footer";
-import { PHONE_NUMBER_HOTLINE } from "@/constants/contacts";
+import { PHONE_NUMBER_MAIN } from "@/constants/contacts";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
@@ -35,14 +35,14 @@ const FloatingContactWidget = () => {
                             variant="ghost"
                             size="icon"
                             className="w-8 h-8 md:w-10 md:h-10 rounded-full hover:bg-green-50/50 text-green-600 transition-colors"
-                            onClick={() => window.open(`tel:${PHONE_NUMBER_HOTLINE}`, "_self")}
+                            onClick={() => window.open(`tel:${PHONE_NUMBER_MAIN}`, "_self")}
                         >
                             <Phone className="w-4 h-4 md:w-5 md:h-5" />
                             <span className="sr-only">Call Us</span>
                         </Button>
                     </TooltipTrigger>
                     <TooltipContent side="right">
-                        <p>Call Hotline: {PHONE_NUMBER_HOTLINE}</p>
+                        <p>Call Hotline: {PHONE_NUMBER_MAIN}</p>
                     </TooltipContent>
                 </Tooltip>
             </TooltipProvider>
